@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)build\dotnet\$(MSBuildProjectName)\bin\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)build\dotnet\$(MSBuildProjectName)\obj\</BaseIntermediateOutputPath>
+    <RestorePackagesPath>$(MSBuildThisFileDirectory)build\packages\nuget\</RestorePackagesPath>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,60 @@
+# MuOffline — line-ending and content-type rules
+#
+# Why this file matters more than usual here: Phase 1's evidence model rests on
+# hashes (PLAN_P1.md §4, §6). Platform-dependent line-ending translation would
+# make a file's hash depend on which machine checked it out, which would silently
+# invalidate provenance records. Everything below exists to make content
+# byte-identical everywhere.
+
+# Normalize text in the repository; check out LF so hashes are stable across
+# Windows, WSL, and CI. Git still accepts CRLF from a Windows editor on commit.
+* text=auto eol=lf
+
+# Documentation and records — the entire tracked content today.
+*.md   text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# ---------------------------------------------------------------------------
+# Binary game assets — DO NOT relax these
+# ---------------------------------------------------------------------------
+# Carried forward from the seed's own .gitattributes, which records the reason
+# (MuMain issue #516): some encrypted .bmd / .oz* files contain no NUL bytes, so
+# `text=auto` misdetects them as text. On a Windows checkout their lone LF is
+# rewritten to CRLF, corrupting the file by exactly one byte — silently, and in
+# a way that only surfaces later as a load failure or a wrong render.
+#
+# These rules are declared now, before any asset tree is tracked, so the
+# protection is already in place when a working copy lands. Case-insensitive
+# classes cover the mixed-case extensions used across the asset tree.
+*.[Bb][Mm][Dd]     binary
+*.[Oo][Zz][Bb]     binary
+*.[Oo][Zz][Jj]     binary
+*.[Oo][Zz][Jj]2    binary
+*.[Oo][Zz][Tt]     binary
+*.[Oo][Zz][Gg]     binary
+*.[Oo][Zz][Pp]     binary
+*.[Oo][Zz][Dd]     binary
+*.[Aa][Tt][Tt]     binary
+*.[Mm][Aa][Pp]     binary
+*.[Oo][Bb][Jj]     binary
+*.[Cc][Ww][Ss]     binary
+*.[Cc][Ss][Rr]     binary
+*.[Tt][Gg][Aa]     binary
+*.[Bb][Mm][Pp]     binary
+*.[Jj][Pp][Gg]     binary
+*.[Jj][Pp][Ee][Gg] binary
+*.[Pp][Nn][Gg]     binary
+*.[Ww][Aa][Vv]     binary
+*.[Oo][Gg][Gg]     binary
+*.[Mm][Pp]3        binary
+
+# Captured evidence artifacts (traces, packet captures, screenshots, video)
+# are never text and must never be normalized.
+*.pcap  binary
+*.pcapng binary
+*.bin   binary
+*.trace binary
+*.mp4   binary
+*.zip   binary

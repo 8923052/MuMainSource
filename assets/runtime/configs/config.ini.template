@@ -1,0 +1,35 @@
+[Window]
+Width=1600
+Height=900
+Windowed=1
+
+[Audio]
+MasterSoundVolume=5
+MasterMusicVolume=5
+
+[Network]
+DefaultConnectServerIP=127.127.127.127
+DefaultConnectServerPort=44405
+
+[Localization]
+AssetLanguage=Eng
+UILocale=en
+
+[UI]
+Font=
+RmlScale=160
+ControlUIScale=120
+
+[Camera]
+Zoom=1735
+
+[Performance]
+; auto, direct3d12, vulkan, or metal (requires platform/GPU support).
+RendererBackend=auto
+VSync=0
+; 0 = same-frame rendering, 1 = three-stage pipeline. Restart required.
+RenderPipeline=1
+; Presentation FPS cap. 0 = unlimited; VSync can still limit presentation.
+FpsLimit=0
+SessionWorkerCount=8
+SharedAssetIdleSeconds=120

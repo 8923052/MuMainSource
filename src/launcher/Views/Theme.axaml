@@ -1,0 +1,49 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Style Selector="UserControl">
+    <Setter Property="FontFamily" Value="Segoe UI, sans-serif" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Foreground" Value="#E7EBF2" />
+  </Style>
+  <Style Selector="TextBlock.muted"><Setter Property="Foreground" Value="#8996A9" /></Style>
+  <Style Selector="TextBlock.eyebrow">
+    <Setter Property="Foreground" Value="#A5B2C6" /><Setter Property="FontSize" Value="11" />
+    <Setter Property="LetterSpacing" Value="1.5" /><Setter Property="FontWeight" Value="SemiBold" />
+  </Style>
+  <Style Selector="TextBlock.title"><Setter Property="FontSize" Value="30" /><Setter Property="FontWeight" Value="SemiBold" /></Style>
+  <Style Selector="Border.card">
+    <Setter Property="Background" Value="#161F2D" /><Setter Property="BorderBrush" Value="#263244" />
+    <Setter Property="BorderThickness" Value="1" /><Setter Property="CornerRadius" Value="14" /><Setter Property="Padding" Value="24" />
+  </Style>
+  <Style Selector="TextBox">
+    <Setter Property="CornerRadius" Value="7" /><Setter Property="Background" Value="#101925" />
+    <Setter Property="BorderBrush" Value="#334156" /><Setter Property="Padding" Value="12,10" />
+    <Setter Property="MinHeight" Value="42" />
+  </Style>
+  <Style Selector="ComboBox">
+    <Setter Property="CornerRadius" Value="7" /><Setter Property="MinHeight" Value="42" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" /><Setter Property="Background" Value="#101925" />
+  </Style>
+  <Style Selector="Button">
+    <Setter Property="CornerRadius" Value="7" /><Setter Property="Padding" Value="16,11" />
+    <Setter Property="Background" Value="#263244" /><Setter Property="Cursor" Value="Hand" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Button.primary">
+    <Setter Property="Background" Value="#E3B879" /><Setter Property="Foreground" Value="#151B25" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+  </Style>
+  <Style Selector="Button.primary:pointerover /template/ ContentPresenter">
+    <Setter Property="Background" Value="#F2CC95" /><Setter Property="Foreground" Value="#151B25" />
+  </Style>
+  <Style Selector="Button.nav">
+    <Setter Property="Background" Value="Transparent" /><Setter Property="Foreground" Value="#9BA7BA" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" /><Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="Padding" Value="15,14" />
+  </Style>
+  <Style Selector="Button.nav.active">
+    <Setter Property="Background" Value="#2E2C2B" /><Setter Property="Foreground" Value="#F0C98F" />
+  </Style>
+  <Style Selector="Button.danger"><Setter Property="Foreground" Value="#FFACA8" /></Style>
+  <Style Selector="ProgressBar"><Setter Property="Foreground" Value="#77D9B4" /><Setter Property="Background" Value="#293749" /><Setter Property="Height" Value="4" /></Style>
+  <Style Selector="ListBox"><Setter Property="Background" Value="Transparent" /></Style>
+</Styles>

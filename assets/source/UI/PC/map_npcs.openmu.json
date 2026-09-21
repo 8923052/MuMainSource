@@ -1,0 +1,1317 @@
+{
+  "schema": 1,
+  "source": "OpenMU config.MonsterSpawnArea + MonsterDefinition + GameMapDefinition",
+  "filter": "Automatic point spawns; PassiveNpc and Guard only",
+  "maps": [
+    {
+      "number": 0,
+      "name": "Lorencia"
+    },
+    {
+      "number": 1,
+      "name": "Dungeon"
+    },
+    {
+      "number": 2,
+      "name": "Devias"
+    },
+    {
+      "number": 3,
+      "name": "Noria"
+    },
+    {
+      "number": 4,
+      "name": "Lost Tower"
+    },
+    {
+      "number": 5,
+      "name": "Exile"
+    },
+    {
+      "number": 6,
+      "name": "Arena"
+    },
+    {
+      "number": 7,
+      "name": "Atlans"
+    },
+    {
+      "number": 8,
+      "name": "Tarkan"
+    },
+    {
+      "number": 9,
+      "name": "Devil Square 1"
+    },
+    {
+      "number": 9,
+      "name": "Devil Square 2"
+    },
+    {
+      "number": 9,
+      "name": "Devil Square 3"
+    },
+    {
+      "number": 9,
+      "name": "Devil Square 4"
+    },
+    {
+      "number": 10,
+      "name": "Icarus"
+    },
+    {
+      "number": 11,
+      "name": "Blood Castle 1"
+    },
+    {
+      "number": 12,
+      "name": "Blood Castle 2"
+    },
+    {
+      "number": 13,
+      "name": "Blood Castle 3"
+    },
+    {
+      "number": 14,
+      "name": "Blood Castle 4"
+    },
+    {
+      "number": 15,
+      "name": "Blood Castle 5"
+    },
+    {
+      "number": 16,
+      "name": "Blood Castle 6"
+    },
+    {
+      "number": 17,
+      "name": "Blood Castle 7"
+    },
+    {
+      "number": 18,
+      "name": "Chaos Castle 1"
+    },
+    {
+      "number": 19,
+      "name": "Chaos Castle 2"
+    },
+    {
+      "number": 20,
+      "name": "Chaos Castle 3"
+    },
+    {
+      "number": 21,
+      "name": "Chaos Castle 4"
+    },
+    {
+      "number": 22,
+      "name": "Chaos Castle 5"
+    },
+    {
+      "number": 23,
+      "name": "Chaos Castle 6"
+    },
+    {
+      "number": 24,
+      "name": "Kalima 1"
+    },
+    {
+      "number": 25,
+      "name": "Kalima 2"
+    },
+    {
+      "number": 26,
+      "name": "Kalima 3"
+    },
+    {
+      "number": 27,
+      "name": "Kalima 4"
+    },
+    {
+      "number": 28,
+      "name": "Kalima 5"
+    },
+    {
+      "number": 29,
+      "name": "Kalima 6"
+    },
+    {
+      "number": 30,
+      "name": "Valley of Loren"
+    },
+    {
+      "number": 31,
+      "name": "Land_of_Trials"
+    },
+    {
+      "number": 32,
+      "name": "Devil Square 5"
+    },
+    {
+      "number": 32,
+      "name": "Devil Square 6"
+    },
+    {
+      "number": 32,
+      "name": "Devil Square 7"
+    },
+    {
+      "number": 33,
+      "name": "Aida"
+    },
+    {
+      "number": 34,
+      "name": "Crywolf Fortress"
+    },
+    {
+      "number": 36,
+      "name": "Kalima 7"
+    },
+    {
+      "number": 37,
+      "name": "Kanturu_I"
+    },
+    {
+      "number": 38,
+      "name": "Kanturu_III"
+    },
+    {
+      "number": 39,
+      "name": "Kanturu Event"
+    },
+    {
+      "number": 40,
+      "name": "Silent Map?"
+    },
+    {
+      "number": 41,
+      "name": "Barracks of Balgass"
+    },
+    {
+      "number": 42,
+      "name": "Balgass Refuge"
+    },
+    {
+      "number": 45,
+      "name": "Illusion Temple 1"
+    },
+    {
+      "number": 46,
+      "name": "Illusion Temple 2"
+    },
+    {
+      "number": 47,
+      "name": "Illusion Temple 3"
+    },
+    {
+      "number": 48,
+      "name": "Illusion Temple 4"
+    },
+    {
+      "number": 49,
+      "name": "Illusion Temple 5"
+    },
+    {
+      "number": 50,
+      "name": "Illusion Temple 6"
+    },
+    {
+      "number": 51,
+      "name": "Elvenland"
+    },
+    {
+      "number": 52,
+      "name": "Blood Castle 8"
+    },
+    {
+      "number": 53,
+      "name": "Chaos Castle 7"
+    },
+    {
+      "number": 56,
+      "name": "Swamp Of Calmness"
+    },
+    {
+      "number": 57,
+      "name": "LaCleon"
+    },
+    {
+      "number": 58,
+      "name": "LaCleon Boss"
+    },
+    {
+      "number": 62,
+      "name": "Santa Village"
+    },
+    {
+      "number": 63,
+      "name": "Vulcanus"
+    },
+    {
+      "number": 64,
+      "name": "Duel Arena"
+    },
+    {
+      "number": 65,
+      "name": "Doppelgaenger 1"
+    },
+    {
+      "number": 66,
+      "name": "Doppelgaenger 2"
+    },
+    {
+      "number": 67,
+      "name": "Doppelgaenger 3"
+    },
+    {
+      "number": 68,
+      "name": "Doppelgaenger 4"
+    },
+    {
+      "number": 69,
+      "name": "Fortress of Imperial Guardian 1"
+    },
+    {
+      "number": 70,
+      "name": "Fortress of Imperial Guardian 2"
+    },
+    {
+      "number": 71,
+      "name": "Fortress of Imperial Guardian 3"
+    },
+    {
+      "number": 72,
+      "name": "Fortress of Imperial Guardian 4"
+    },
+    {
+      "number": 79,
+      "name": "LorenMarket"
+    },
+    {
+      "number": 80,
+      "name": "Karutan 1"
+    },
+    {
+      "number": 81,
+      "name": "Karutan 2"
+    }
+  ],
+  "npcs": [
+    {
+      "map": 0,
+      "npc": 226,
+      "name": "Pet Trainer",
+      "x": 122,
+      "y": 110,
+      "direction": 4
+    },
+    {
+      "map": 0,
+      "npc": 230,
+      "name": "Alex",
+      "x": 62,
+      "y": 130,
+      "direction": 4
+    },
+    {
+      "map": 0,
+      "npc": 236,
+      "name": "Golden Archer",
+      "x": 175,
+      "y": 120,
+      "direction": 4
+    },
+    {
+      "map": 0,
+      "npc": 240,
+      "name": "Baz The Vault Keeper",
+      "x": 146,
+      "y": 110,
+      "direction": 4
+    },
+    {
+      "map": 0,
+      "npc": 240,
+      "name": "Baz The Vault Keeper",
+      "x": 147,
+      "y": 145,
+      "direction": 2
+    },
+    {
+      "map": 0,
+      "npc": 247,
+      "name": "Crossbow Guard",
+      "x": 114,
+      "y": 125,
+      "direction": 4
+    },
+    {
+      "map": 0,
+      "npc": 249,
+      "name": "Berdysh Guard",
+      "x": 94,
+      "y": 125,
+      "direction": 8
+    },
+    {
+      "map": 0,
+      "npc": 249,
+      "name": "Berdysh Guard",
+      "x": 94,
+      "y": 130,
+      "direction": 8
+    },
+    {
+      "map": 0,
+      "npc": 249,
+      "name": "Berdysh Guard",
+      "x": 131,
+      "y": 88,
+      "direction": 2
+    },
+    {
+      "map": 0,
+      "npc": 249,
+      "name": "Berdysh Guard",
+      "x": 131,
+      "y": 148,
+      "direction": 2
+    },
+    {
+      "map": 0,
+      "npc": 249,
+      "name": "Berdysh Guard",
+      "x": 173,
+      "y": 125,
+      "direction": 4
+    },
+    {
+      "map": 0,
+      "npc": 251,
+      "name": "Hanzo The Blacksmith",
+      "x": 116,
+      "y": 141,
+      "direction": 4
+    },
+    {
+      "map": 0,
+      "npc": 253,
+      "name": "Potion Girl Amy",
+      "x": 127,
+      "y": 86,
+      "direction": 3
+    },
+    {
+      "map": 0,
+      "npc": 254,
+      "name": "Pasi The Mage",
+      "x": 118,
+      "y": 113,
+      "direction": 4
+    },
+    {
+      "map": 0,
+      "npc": 255,
+      "name": "Lumen the Barmaid",
+      "x": 123,
+      "y": 135,
+      "direction": 2
+    },
+    {
+      "map": 0,
+      "npc": 257,
+      "name": "Elf Soldier",
+      "x": 96,
+      "y": 129,
+      "direction": 2
+    },
+    {
+      "map": 0,
+      "npc": 257,
+      "name": "Elf Soldier",
+      "x": 130,
+      "y": 128,
+      "direction": 4
+    },
+    {
+      "map": 0,
+      "npc": 257,
+      "name": "Elf Soldier",
+      "x": 132,
+      "y": 165,
+      "direction": 4
+    },
+    {
+      "map": 0,
+      "npc": 257,
+      "name": "Elf Soldier",
+      "x": 174,
+      "y": 129,
+      "direction": 2
+    },
+    {
+      "map": 0,
+      "npc": 371,
+      "name": "Leo The Helper",
+      "x": 130,
+      "y": 126,
+      "direction": 4
+    },
+    {
+      "map": 0,
+      "npc": 375,
+      "name": "Chaos Card Master",
+      "x": 132,
+      "y": 161,
+      "direction": 4
+    },
+    {
+      "map": 0,
+      "npc": 543,
+      "name": "Gens Duprian",
+      "x": 141,
+      "y": 143,
+      "direction": 3
+    },
+    {
+      "map": 0,
+      "npc": 547,
+      "name": "Market Union Member Julia",
+      "x": 139,
+      "y": 138,
+      "direction": 4
+    },
+    {
+      "map": 2,
+      "npc": 233,
+      "name": "Messenger of Arch.",
+      "x": 217,
+      "y": 20,
+      "direction": 4
+    },
+    {
+      "map": 2,
+      "npc": 233,
+      "name": "Messenger of Arch.",
+      "x": 217,
+      "y": 29,
+      "direction": 4
+    },
+    {
+      "map": 2,
+      "npc": 235,
+      "name": "Sevina the Priestess",
+      "x": 183,
+      "y": 32,
+      "direction": 4
+    },
+    {
+      "map": 2,
+      "npc": 240,
+      "name": "Baz The Vault Keeper",
+      "x": 218,
+      "y": 63,
+      "direction": 3
+    },
+    {
+      "map": 2,
+      "npc": 241,
+      "name": "Guild Master",
+      "x": 215,
+      "y": 45,
+      "direction": 2
+    },
+    {
+      "map": 2,
+      "npc": 244,
+      "name": "Caren the Barmaid",
+      "x": 226,
+      "y": 25,
+      "direction": 4
+    },
+    {
+      "map": 2,
+      "npc": 245,
+      "name": "Izabel The Wizard",
+      "x": 225,
+      "y": 41,
+      "direction": 4
+    },
+    {
+      "map": 2,
+      "npc": 246,
+      "name": "Zienna The Weapons Merchant",
+      "x": 186,
+      "y": 47,
+      "direction": 4
+    },
+    {
+      "map": 2,
+      "npc": 247,
+      "name": "Crossbow Guard",
+      "x": 169,
+      "y": 39,
+      "direction": 8
+    },
+    {
+      "map": 2,
+      "npc": 247,
+      "name": "Crossbow Guard",
+      "x": 169,
+      "y": 45,
+      "direction": 8
+    },
+    {
+      "map": 2,
+      "npc": 247,
+      "name": "Crossbow Guard",
+      "x": 219,
+      "y": 79,
+      "direction": 6
+    },
+    {
+      "map": 2,
+      "npc": 247,
+      "name": "Crossbow Guard",
+      "x": 224,
+      "y": 79,
+      "direction": 6
+    },
+    {
+      "map": 2,
+      "npc": 256,
+      "name": "Lahap",
+      "x": 193,
+      "y": 13,
+      "direction": 4
+    },
+    {
+      "map": 2,
+      "npc": 257,
+      "name": "Elf Soldier",
+      "x": 219,
+      "y": 76,
+      "direction": 4
+    },
+    {
+      "map": 2,
+      "npc": 379,
+      "name": "Fireworks Girl",
+      "x": 13,
+      "y": 28,
+      "direction": 4
+    },
+    {
+      "map": 2,
+      "npc": 385,
+      "name": "Mirage",
+      "x": 197,
+      "y": 53,
+      "direction": 2
+    },
+    {
+      "map": 2,
+      "npc": 406,
+      "name": "Priest Devin",
+      "x": 181,
+      "y": 35,
+      "direction": 4
+    },
+    {
+      "map": 2,
+      "npc": 478,
+      "name": "Delgado - Lucky Coins",
+      "x": 191,
+      "y": 17,
+      "direction": 4
+    },
+    {
+      "map": 2,
+      "npc": 522,
+      "name": "Adviser Jerinteu",
+      "x": 229,
+      "y": 221,
+      "direction": 2
+    },
+    {
+      "map": 2,
+      "npc": 540,
+      "name": "Lugard",
+      "x": 233,
+      "y": 66,
+      "direction": 2
+    },
+    {
+      "map": 2,
+      "npc": 566,
+      "name": "Mercenary Guild Felicia",
+      "x": 204,
+      "y": 61,
+      "direction": 4
+    },
+    {
+      "map": 3,
+      "npc": 237,
+      "name": "Charon",
+      "x": 171,
+      "y": 105,
+      "direction": 4
+    },
+    {
+      "map": 3,
+      "npc": 238,
+      "name": "Chaos Goblin",
+      "x": 180,
+      "y": 103,
+      "direction": 2
+    },
+    {
+      "map": 3,
+      "npc": 240,
+      "name": "Baz The Vault Keeper",
+      "x": 172,
+      "y": 96,
+      "direction": 4
+    },
+    {
+      "map": 3,
+      "npc": 242,
+      "name": "Elf Lala",
+      "x": 173,
+      "y": 125,
+      "direction": 2
+    },
+    {
+      "map": 3,
+      "npc": 243,
+      "name": "Eo the Craftsman",
+      "x": 195,
+      "y": 124,
+      "direction": 3
+    },
+    {
+      "map": 3,
+      "npc": 253,
+      "name": "Potion Girl Amy",
+      "x": 169,
+      "y": 109,
+      "direction": 4
+    },
+    {
+      "map": 3,
+      "npc": 253,
+      "name": "Potion Girl Amy",
+      "x": 193,
+      "y": 110,
+      "direction": 3
+    },
+    {
+      "map": 3,
+      "npc": 257,
+      "name": "Elf Soldier",
+      "x": 167,
+      "y": 118,
+      "direction": 2
+    },
+    {
+      "map": 3,
+      "npc": 450,
+      "name": "Cherry Blossom Spirit",
+      "x": 179,
+      "y": 126,
+      "direction": 2
+    },
+    {
+      "map": 3,
+      "npc": 451,
+      "name": "Cherry Blossom Tree",
+      "x": 179,
+      "y": 129,
+      "direction": 4
+    },
+    {
+      "map": 3,
+      "npc": 544,
+      "name": "Gens Vanert",
+      "x": 187,
+      "y": 125,
+      "direction": 2
+    },
+    {
+      "map": 4,
+      "npc": 240,
+      "name": "Baz The Vault Keeper",
+      "x": 201,
+      "y": 76,
+      "direction": 4
+    },
+    {
+      "map": 4,
+      "npc": 253,
+      "name": "Potion Girl Amy",
+      "x": 207,
+      "y": 76,
+      "direction": 2
+    },
+    {
+      "map": 6,
+      "npc": 239,
+      "name": "Arena Guard",
+      "x": 67,
+      "y": 140,
+      "direction": 2
+    },
+    {
+      "map": 6,
+      "npc": 240,
+      "name": "Baz The Vault Keeper",
+      "x": 58,
+      "y": 140,
+      "direction": 2
+    },
+    {
+      "map": 7,
+      "npc": 240,
+      "name": "Baz The Vault Keeper",
+      "x": 23,
+      "y": 17,
+      "direction": 2
+    },
+    {
+      "map": 11,
+      "npc": 232,
+      "name": "Archangel",
+      "x": 10,
+      "y": 9,
+      "direction": 2
+    },
+    {
+      "map": 12,
+      "npc": 232,
+      "name": "Archangel",
+      "x": 10,
+      "y": 9,
+      "direction": 2
+    },
+    {
+      "map": 13,
+      "npc": 232,
+      "name": "Archangel",
+      "x": 10,
+      "y": 9,
+      "direction": 2
+    },
+    {
+      "map": 14,
+      "npc": 232,
+      "name": "Archangel",
+      "x": 10,
+      "y": 9,
+      "direction": 2
+    },
+    {
+      "map": 15,
+      "npc": 232,
+      "name": "Archangel",
+      "x": 10,
+      "y": 9,
+      "direction": 2
+    },
+    {
+      "map": 16,
+      "npc": 232,
+      "name": "Archangel",
+      "x": 10,
+      "y": 9,
+      "direction": 2
+    },
+    {
+      "map": 17,
+      "npc": 232,
+      "name": "Archangel",
+      "x": 10,
+      "y": 9,
+      "direction": 2
+    },
+    {
+      "map": 24,
+      "npc": 259,
+      "name": "Oracle Layla",
+      "x": 7,
+      "y": 19,
+      "direction": 3
+    },
+    {
+      "map": 25,
+      "npc": 259,
+      "name": "Oracle Layla",
+      "x": 7,
+      "y": 19,
+      "direction": 3
+    },
+    {
+      "map": 26,
+      "npc": 259,
+      "name": "Oracle Layla",
+      "x": 7,
+      "y": 19,
+      "direction": 3
+    },
+    {
+      "map": 27,
+      "npc": 259,
+      "name": "Oracle Layla",
+      "x": 7,
+      "y": 19,
+      "direction": 3
+    },
+    {
+      "map": 28,
+      "npc": 259,
+      "name": "Oracle Layla",
+      "x": 7,
+      "y": 19,
+      "direction": 3
+    },
+    {
+      "map": 29,
+      "npc": 259,
+      "name": "Oracle Layla",
+      "x": 7,
+      "y": 19,
+      "direction": 3
+    },
+    {
+      "map": 30,
+      "npc": 216,
+      "name": "Crown",
+      "x": 176,
+      "y": 212,
+      "direction": 2
+    },
+    {
+      "map": 30,
+      "npc": 217,
+      "name": "Crown Switch1",
+      "x": 167,
+      "y": 194,
+      "direction": 8
+    },
+    {
+      "map": 30,
+      "npc": 218,
+      "name": "Crown Switch2",
+      "x": 184,
+      "y": 195,
+      "direction": 8
+    },
+    {
+      "map": 30,
+      "npc": 220,
+      "name": "Guard",
+      "x": 139,
+      "y": 101,
+      "direction": 4
+    },
+    {
+      "map": 30,
+      "npc": 223,
+      "name": "Senior",
+      "x": 179,
+      "y": 214,
+      "direction": 2
+    },
+    {
+      "map": 30,
+      "npc": 224,
+      "name": "Guardsman",
+      "x": 86,
+      "y": 61,
+      "direction": 2
+    },
+    {
+      "map": 30,
+      "npc": 224,
+      "name": "Guardsman",
+      "x": 99,
+      "y": 61,
+      "direction": 2
+    },
+    {
+      "map": 30,
+      "npc": 376,
+      "name": "Pamela the Supplier",
+      "x": 90,
+      "y": 43,
+      "direction": 2
+    },
+    {
+      "map": 30,
+      "npc": 377,
+      "name": "Angela the Supplier",
+      "x": 90,
+      "y": 218,
+      "direction": 4
+    },
+    {
+      "map": 33,
+      "npc": 369,
+      "name": "Osbourne",
+      "x": 78,
+      "y": 13,
+      "direction": 4
+    },
+    {
+      "map": 33,
+      "npc": 370,
+      "name": "Jerridon",
+      "x": 86,
+      "y": 14,
+      "direction": 2
+    },
+    {
+      "map": 34,
+      "npc": 224,
+      "name": "Guardsman",
+      "x": 118,
+      "y": 11,
+      "direction": 4
+    },
+    {
+      "map": 34,
+      "npc": 226,
+      "name": "Pet Trainer",
+      "x": 135,
+      "y": 47,
+      "direction": 2
+    },
+    {
+      "map": 34,
+      "npc": 240,
+      "name": "Baz The Vault Keeper",
+      "x": 113,
+      "y": 56,
+      "direction": 2
+    },
+    {
+      "map": 34,
+      "npc": 251,
+      "name": "Hanzo The Blacksmith",
+      "x": 145,
+      "y": 14,
+      "direction": 4
+    },
+    {
+      "map": 34,
+      "npc": 256,
+      "name": "Lahap",
+      "x": 96,
+      "y": 25,
+      "direction": 4
+    },
+    {
+      "map": 34,
+      "npc": 406,
+      "name": "Priest Devin",
+      "x": 228,
+      "y": 48,
+      "direction": 2
+    },
+    {
+      "map": 34,
+      "npc": 407,
+      "name": "Werewolf Quarrel",
+      "x": 62,
+      "y": 239,
+      "direction": 2
+    },
+    {
+      "map": 36,
+      "npc": 259,
+      "name": "Oracle Layla",
+      "x": 7,
+      "y": 19,
+      "direction": 3
+    },
+    {
+      "map": 38,
+      "npc": 367,
+      "name": "Gateway Machine",
+      "x": 141,
+      "y": 191,
+      "direction": 3
+    },
+    {
+      "map": 39,
+      "npc": 368,
+      "name": "Elphis",
+      "x": 77,
+      "y": 177,
+      "direction": 2
+    },
+    {
+      "map": 41,
+      "npc": 408,
+      "name": "Gatekeeper",
+      "x": 119,
+      "y": 168,
+      "direction": 3
+    },
+    {
+      "map": 51,
+      "npc": 240,
+      "name": "Baz The Vault Keeper",
+      "x": 51,
+      "y": 229,
+      "direction": 2
+    },
+    {
+      "map": 51,
+      "npc": 256,
+      "name": "Lahap",
+      "x": 37,
+      "y": 242,
+      "direction": 2
+    },
+    {
+      "map": 51,
+      "npc": 257,
+      "name": "Elf Soldier",
+      "x": 44,
+      "y": 189,
+      "direction": 4
+    },
+    {
+      "map": 51,
+      "npc": 257,
+      "name": "Elf Soldier",
+      "x": 57,
+      "y": 231,
+      "direction": 2
+    },
+    {
+      "map": 51,
+      "npc": 385,
+      "name": "Mirage",
+      "x": 55,
+      "y": 243,
+      "direction": 2
+    },
+    {
+      "map": 51,
+      "npc": 415,
+      "name": "Silvia",
+      "x": 44,
+      "y": 229,
+      "direction": 2
+    },
+    {
+      "map": 51,
+      "npc": 416,
+      "name": "Rhea",
+      "x": 29,
+      "y": 237,
+      "direction": 3
+    },
+    {
+      "map": 51,
+      "npc": 417,
+      "name": "Marce",
+      "x": 37,
+      "y": 218,
+      "direction": 2
+    },
+    {
+      "map": 51,
+      "npc": 452,
+      "name": "Seed Master",
+      "x": 45,
+      "y": 243,
+      "direction": 2
+    },
+    {
+      "map": 51,
+      "npc": 453,
+      "name": "Seed Researcher",
+      "x": 49,
+      "y": 243,
+      "direction": 2
+    },
+    {
+      "map": 51,
+      "npc": 492,
+      "name": "Moss The Merchant",
+      "x": 22,
+      "y": 225,
+      "direction": 3
+    },
+    {
+      "map": 51,
+      "npc": 540,
+      "name": "Lugard",
+      "x": 49,
+      "y": 216,
+      "direction": 3
+    },
+    {
+      "map": 51,
+      "npc": 579,
+      "name": "David",
+      "x": 20,
+      "y": 214,
+      "direction": 4
+    },
+    {
+      "map": 52,
+      "npc": 232,
+      "name": "Archangel",
+      "x": 10,
+      "y": 9,
+      "direction": 2
+    },
+    {
+      "map": 62,
+      "npc": 467,
+      "name": "Snowman",
+      "x": 202,
+      "y": 41,
+      "direction": 2
+    },
+    {
+      "map": 62,
+      "npc": 468,
+      "name": "Little Santa Yellow",
+      "x": 222,
+      "y": 24,
+      "direction": 2
+    },
+    {
+      "map": 62,
+      "npc": 469,
+      "name": "Little Santa Green",
+      "x": 202,
+      "y": 33,
+      "direction": 2
+    },
+    {
+      "map": 62,
+      "npc": 470,
+      "name": "Little Santa Red",
+      "x": 192,
+      "y": 24,
+      "direction": 2
+    },
+    {
+      "map": 62,
+      "npc": 471,
+      "name": "Little Santa Blue",
+      "x": 207,
+      "y": 9,
+      "direction": 2
+    },
+    {
+      "map": 62,
+      "npc": 472,
+      "name": "Little Santa White",
+      "x": 225,
+      "y": 11,
+      "direction": 2
+    },
+    {
+      "map": 62,
+      "npc": 473,
+      "name": "Little Santa Black",
+      "x": 232,
+      "y": 13,
+      "direction": 2
+    },
+    {
+      "map": 62,
+      "npc": 474,
+      "name": "Little Santa Orange",
+      "x": 216,
+      "y": 19,
+      "direction": 2
+    },
+    {
+      "map": 62,
+      "npc": 475,
+      "name": "Little Santa Pink",
+      "x": 193,
+      "y": 27,
+      "direction": 2
+    },
+    {
+      "map": 63,
+      "npc": 479,
+      "name": "Gatekeeper Titus",
+      "x": 122,
+      "y": 135,
+      "direction": 2
+    },
+    {
+      "map": 79,
+      "npc": 545,
+      "name": "Christine the General Goods Merchant",
+      "x": 113,
+      "y": 116,
+      "direction": 4
+    },
+    {
+      "map": 79,
+      "npc": 546,
+      "name": "Jeweler Raul",
+      "x": 131,
+      "y": 109,
+      "direction": 4
+    },
+    {
+      "map": 79,
+      "npc": 547,
+      "name": "Market Union Member Julia",
+      "x": 123,
+      "y": 140,
+      "direction": 4
+    },
+    {
+      "map": 80,
+      "npc": 240,
+      "name": "Baz The Vault Keeper",
+      "x": 122,
+      "y": 96,
+      "direction": 4
+    },
+    {
+      "map": 80,
+      "npc": 240,
+      "name": "Baz The Vault Keeper",
+      "x": 123,
+      "y": 132,
+      "direction": 3
+    },
+    {
+      "map": 80,
+      "npc": 240,
+      "name": "Baz The Vault Keeper",
+      "x": 158,
+      "y": 126,
+      "direction": 2
+    },
+    {
+      "map": 80,
+      "npc": 577,
+      "name": "Leina the General Goods Merchant",
+      "x": 121,
+      "y": 102,
+      "direction": 4
+    },
+    {
+      "map": 80,
+      "npc": 578,
+      "name": "Weapons Merchant Bolo",
+      "x": 117,
+      "y": 126,
+      "direction": 4
+    }
+  ]
+}

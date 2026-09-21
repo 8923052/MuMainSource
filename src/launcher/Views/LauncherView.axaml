@@ -1,0 +1,222 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="MuLauncher.Views.LauncherView" x:CompileBindings="False">
+  <Grid x:Name="Shell" ColumnDefinitions="190,*" Background="#0E1520">
+    <Border x:Name="Sidebar" Background="#111A27" BorderBrush="#253043" BorderThickness="0,0,1,0" Padding="18,28">
+      <DockPanel>
+        <StackPanel x:Name="Logo" DockPanel.Dock="Top" Spacing="4" Margin="12,0,0,42">
+          <TextBlock Text="MU" Foreground="#F0C98F" FontSize="26" FontWeight="Bold" LetterSpacing="2" />
+          <TextBlock Text="GAME LAUNCHER" Classes="eyebrow" FontSize="9" />
+        </StackPanel>
+        <StackPanel x:Name="SidebarFooter" DockPanel.Dock="Bottom" Margin="12,24,0,0" Spacing="7">
+          <TextBlock Text="MuTwo client" Classes="muted" FontSize="11" />
+        </StackPanel>
+        <StackPanel x:Name="Navigation" Spacing="6">
+          <Button Classes="nav" Classes.active="{Binding PlayVisible}" Content="01   Play" Click="PlayTab" />
+          <Button Classes="nav" Classes.active="{Binding PresetsVisible}" Content="02   Session presets" Click="PresetsTab" />
+          <Button Classes="nav" Classes.active="{Binding SettingsVisible}" Content="03   Client settings" Click="SettingsTab" />
+        </StackPanel>
+      </DockPanel>
+    </Border>
+    <Grid x:Name="Workspace" Grid.Column="1" RowDefinitions="Auto,*,Auto" Margin="32,28">
+      <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+          <StackPanel IsVisible="{Binding PlayVisible}" Spacing="22">
+            <Border Classes="card">
+              <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+                <TextBlock Text="CONNECT SERVER" Classes="eyebrow" />
+                <Button Grid.Column="1" Grid.RowSpan="3" VerticalAlignment="Center" Content="↻" Click="RefreshClick" />
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" Margin="0,12,0,8">
+                  <Ellipse Width="9" Height="9" Fill="{Binding StatusColor}" VerticalAlignment="Center" />
+                  <TextBlock Text="{Binding Status}" FontSize="21" FontWeight="SemiBold" />
+                </StackPanel>
+                <TextBlock Grid.Row="2" Text="{Binding ServerDetail}" Classes="muted" FontSize="12" TextWrapping="Wrap" Margin="0,0,18,0" />
+              </Grid>
+            </Border>
+            <StackPanel Spacing="14">
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Text="Server channels" FontSize="18" FontWeight="SemiBold" />
+                <TextBlock Grid.Column="1" Text="Auto refresh · 20 seconds" Classes="muted" FontSize="11" VerticalAlignment="Center" />
+              </Grid>
+              <ProgressBar IsIndeterminate="True" IsVisible="{Binding Refreshing}" Height="2" />
+              <ItemsControl ItemsSource="{Binding Channels}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Border Classes="card" Padding="20,17" Margin="0,0,0,8">
+                      <Grid ColumnDefinitions="*,110,80">
+                        <StackPanel Spacing="5" Margin="0,0,12,0">
+                          <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="15" />
+                          <TextBlock Text="{Binding Details}" Classes="muted" FontSize="11" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Spacing="9" VerticalAlignment="Center" Margin="0,0,14,0">
+                          <TextBlock Text="{Binding LoadLabel}" FontSize="12" HorizontalAlignment="Right" />
+                          <ProgressBar Value="{Binding LoadValue}" Maximum="100" Foreground="{Binding StatusColor}" />
+                        </StackPanel>
+                        <TextBlock Grid.Column="2" Text="{Binding State}" Foreground="{Binding StatusColor}" FontSize="10" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                      </Grid>
+                    </Border>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </StackPanel>
+
+          </StackPanel>
+
+          <StackPanel IsVisible="{Binding PresetsVisible}" Spacing="22">
+            <StackPanel Spacing="8">
+              <TextBlock Text="Session presets" Classes="title" />
+              <TextBlock Text="Create and edit presets in configs/." Classes="muted" TextWrapping="Wrap" />
+            </StackPanel>
+            <Border Classes="card">
+              <StackPanel Spacing="14">
+                <ComboBox ItemsSource="{Binding Presets}" SelectedItem="{Binding PresetName, Mode=TwoWay}" SelectionChanged="PresetSelected" PlaceholderText="Select a preset to edit" />
+                <Grid ColumnDefinitions="*,Auto">
+                  <TextBox Text="{Binding NewPresetName, Mode=TwoWay}" PlaceholderText="New preset name" />
+                  <Button Grid.Column="1" Content="Create" Margin="10,0" Click="CreatePreset" />
+                </Grid>
+                <Grid ColumnDefinitions="*,*,*">
+                  <Button Classes="primary" Content="Start" Click="SaveAndStartPreset" HorizontalAlignment="Stretch" Margin="0,0,5,0" />
+                  <Button Grid.Column="1" Content="Save" Click="SavePreset" HorizontalAlignment="Stretch" Margin="5,0" />
+                  <Button Grid.Column="2" Classes="danger" Content="Delete" Click="DeletePreset" HorizontalAlignment="Stretch" Margin="5,0,0,0" />
+                </Grid>
+              </StackPanel>
+            </Border>
+              <Expander x:Name="SessionsConfigExpander" IsExpanded="False" HorizontalAlignment="Stretch">
+                <Expander.Header>
+                  <TextBlock Text="SESSIONS CONFIG" Classes="eyebrow" />
+                </Expander.Header>
+                <StackPanel Spacing="7">
+                  <TextBlock Text="Main.exe" Classes="muted" FontSize="12" />
+                  <Grid ColumnDefinitions="*,Auto">
+                    <TextBox x:Name="MainExecutableInput" Text="{Binding MainExecutable, Mode=TwoWay}" />
+                    <Button Grid.Column="1" Content="Browse…" Click="ChoosePresetMain" Margin="10,0,0,0" />
+                  </Grid>
+                  <TextBlock Text="Delay between session starts (seconds)" Classes="muted" FontSize="12" />
+                  <TextBox Text="{Binding InitDelay, Mode=TwoWay}" />
+                  <TextBlock Text="Session shortcuts" Classes="eyebrow" Margin="0,10,0,0" />
+                  <TextBlock Text="Press the shortcut keys together. Recording finishes when you release every key." Classes="muted" FontSize="11" TextWrapping="Wrap" />
+                  <ItemsControl ItemsSource="{Binding SessionShortcuts.Bindings}">
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate>
+                        <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,4">
+                          <StackPanel Spacing="2" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Name}" FontSize="12" />
+                            <TextBlock Text="{Binding Display}" Classes="muted" FontSize="11" />
+                          </StackPanel>
+                          <Button Grid.Column="1" Content="{Binding RecordButtonText}" Click="RecordShortcut" Margin="8,0,4,0" />
+                          <Button Grid.Column="2" Content="↻" Click="ResetShortcut" Margin="4,0,0,0" />
+                        </Grid>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                </StackPanel>
+              </Expander>
+            <Border Classes="card">
+              <Grid x:Name="PresetEditor" ColumnDefinitions="240,*">
+                <StackPanel x:Name="SessionListPanel" Spacing="12" Margin="0,0,20,0">
+                  <TextBlock Text="SLOTS" Classes="eyebrow" />
+                  <ListBox ItemsSource="{Binding Slots}" SelectedItem="{Binding SelectedSlot, Mode=TwoWay}" MinHeight="120">
+                    <ListBox.ItemTemplate><DataTemplate><Border BorderBrush="#344357" BorderThickness="1" CornerRadius="6" Padding="10,12"><TextBlock Text="{Binding Label}" TextWrapping="Wrap" /></Border></DataTemplate></ListBox.ItemTemplate>
+                  </ListBox>
+                  <Grid ColumnDefinitions="*,*,*,*">
+                    <Button Content="+" Click="AddSession" ToolTip.Tip="Append a new session slot" AutomationProperties.Name="Add session" HorizontalAlignment="Stretch" Margin="0,0,4,0" />
+                    <Button Grid.Column="1" Content="X" Click="DeleteSlot" ToolTip.Tip="Delete selected slot and session" AutomationProperties.Name="Delete slot" IsEnabled="{Binding CanDeleteSlot}" HorizontalAlignment="Stretch" Margin="4,0" />
+                    <Button Grid.Column="2" Content="↑" Click="MoveSessionUp" ToolTip.Tip="Move session up" AutomationProperties.Name="Move session up" IsEnabled="{Binding CanMoveUp}" HorizontalAlignment="Stretch" Margin="4,0" />
+                    <Button Grid.Column="3" Content="↓" Click="MoveSessionDown" ToolTip.Tip="Move session down" AutomationProperties.Name="Move session down" IsEnabled="{Binding CanMoveDown}" HorizontalAlignment="Stretch" Margin="4,0,0,0" />
+                  </Grid>
+                </StackPanel>
+                <Grid x:Name="SessionEditorArea" Grid.Column="1">
+                <Button Content="Create session" Click="CreateSessionInSlot" IsVisible="{Binding SelectedSlotIsEmpty}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <StackPanel x:Name="SessionFields" Spacing="12" DataContext="{Binding SelectedSession}" IsVisible="{Binding $parent[UserControl].DataContext.HasSelectedSession}">
+                  <TextBlock Text="SESSION DETAILS" Classes="eyebrow" />
+                  <TextBox Text="{Binding DisplayName, Mode=TwoWay}" PlaceholderText="Display name" />
+                  <TextBlock Text="Account name" Classes="muted" FontSize="12" />
+                  <TextBox Text="{Binding Username, Mode=TwoWay}" MaxLength="10" PlaceholderText="Username (stored as plain text)" />
+                  <TextBlock Text="Password" Classes="muted" FontSize="12" />
+                  <TextBox Text="{Binding Password, Mode=TwoWay}" MaxLength="20" PasswordChar="●" PlaceholderText="Leave empty to save no password" />
+                  <TextBlock Text="Automatic login · server / channel" Classes="muted" FontSize="12" />
+                  <Grid ColumnDefinitions="Auto,*">
+                    <Button Content="↻" Click="SyncAutoLogin" ToolTip.Tip="Apply this channel to all sessions" AutomationProperties.Name="Apply channel to all sessions" Margin="0,0,8,0" />
+                    <ComboBox x:Name="AutoLoginPicker" Grid.Column="1" ItemsSource="{Binding $parent[UserControl].DataContext.AutoLoginChoices}" SelectedValueBinding="{Binding Value}" SelectedValue="{Binding AutoLoginPort, Mode=TwoWay}" />
+                  </Grid>
+                  <TextBlock Text="Auto-select character · once at startup" Classes="muted" FontSize="12" />
+                  <TextBox Text="{Binding AutoSelectCharacter, Mode=TwoWay}" MaxLength="10" PlaceholderText="Character name (empty for manual selection)" />
+                  <Button Content="Remove session" Classes="danger" Click="RemoveSession" HorizontalAlignment="Left" IsEnabled="{Binding $parent[UserControl].DataContext.CanRemoveSession}" />
+                </StackPanel>
+                </Grid>
+              </Grid>
+            </Border>
+            <TextBlock Text="Passwords are encrypted for your Windows user. Switching presets saves edits." Classes="muted" FontSize="11" TextWrapping="Wrap" />
+          </StackPanel>
+          <StackPanel IsVisible="{Binding SettingsVisible}" Spacing="22">
+            <StackPanel Spacing="8">
+              <TextBlock Text="Client settings" Classes="title" />
+              <TextBlock Text="Saved to configs/config.ini. Changes apply the next time the game starts." Classes="muted" TextWrapping="Wrap" />
+            </StackPanel>
+            <Expander Header="Connection" IsExpanded="False" HorizontalAlignment="Stretch">
+              <StackPanel Spacing="14">
+                <TextBlock Text="CONNECTION" Classes="eyebrow" />
+                <Grid ColumnDefinitions="2*,*">
+                  <StackPanel Spacing="7" Margin="0,0,14,0"><TextBlock Text="Connect-server IP / host" Classes="muted" FontSize="12" /><TextBox Text="{Binding Settings.Host, Mode=TwoWay}" /></StackPanel>
+                  <StackPanel Grid.Column="1" Spacing="7"><TextBlock Text="Port" Classes="muted" FontSize="12" /><TextBox Text="{Binding Settings.Port, Mode=TwoWay}" /></StackPanel>
+                </Grid>
+              </StackPanel>
+            </Expander>
+            <Expander Header="Performance" IsExpanded="False" HorizontalAlignment="Stretch">
+              <StackPanel Spacing="14">
+                <StackPanel Spacing="7"><TextBlock Text="Renderer backend" Classes="muted" FontSize="12" /><ComboBox x:Name="RendererBackendPicker" ItemsSource="{Binding Settings.RendererBackends}" SelectedValueBinding="{Binding Value}" SelectedValue="{Binding Settings.RendererBackend, Mode=TwoWay}" /></StackPanel>
+                <CheckBox x:Name="VSyncToggle" Content="VSync" IsChecked="{Binding Settings.VSync, Mode=TwoWay}" />
+                <StackPanel Spacing="7"><TextBlock Text="FPS limit (0 = unlimited)" Classes="muted" FontSize="12" /><TextBox x:Name="FpsLimitInput" Text="{Binding Settings.FpsLimit, Mode=TwoWay}" /></StackPanel>
+                <TextBlock Text="VSync synchronizes presentation with the display. The FPS limit is a separate cap. Both apply when the game starts." Classes="muted" FontSize="11" TextWrapping="Wrap" />
+                <StackPanel Spacing="7"><TextBlock Text="Session workers" Classes="muted" FontSize="12" /><TextBox Text="{Binding Settings.Workers, Mode=TwoWay}" /></StackPanel>
+                <TextBlock Text="Workers: 2–64, default 8. RmlUi has one additional dedicated worker." Classes="muted" FontSize="11" TextWrapping="Wrap" />
+              </StackPanel>
+            </Expander>
+            <Expander Header="Display" IsExpanded="False" HorizontalAlignment="Stretch">
+              <StackPanel Spacing="14">
+                <TextBlock Text="DISPLAY &amp; AUDIO" Classes="eyebrow" />
+                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+                  <StackPanel Spacing="7" Margin="0,0,14,14"><TextBlock Text="Window resolution" Classes="muted" FontSize="12" /><ComboBox x:Name="ResolutionPicker" ItemsSource="{Binding Settings.Resolutions}" SelectedItem="{Binding Settings.Resolution, Mode=TwoWay}" /></StackPanel>
+                  <StackPanel Grid.Column="1" Spacing="7" Margin="0,0,0,14"><TextBlock Text="Game language" Classes="muted" FontSize="12" /><ComboBox x:Name="LanguagePicker" ItemsSource="{Binding Settings.Languages}" SelectedValueBinding="{Binding Value}" SelectedValue="{Binding Settings.Language, Mode=TwoWay}" /></StackPanel>
+                  <StackPanel Grid.Row="1" Spacing="7" Margin="0,0,14,0">
+                    <Grid ColumnDefinitions="*,Auto"><TextBlock Text="Sound · 0–10" Classes="muted" FontSize="12" /><TextBlock Grid.Column="1" Text="{Binding Settings.Sound}" /></Grid>
+                    <Slider Minimum="0" Maximum="10" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding Settings.SoundLevel, Mode=TwoWay}" />
+                  </StackPanel>
+                  <StackPanel Grid.Row="1" Grid.Column="1" Spacing="7">
+                    <Grid ColumnDefinitions="*,Auto"><TextBlock Text="Music · 0–10" Classes="muted" FontSize="12" /><TextBlock Grid.Column="1" Text="{Binding Settings.Music}" /></Grid>
+                    <Slider Minimum="0" Maximum="10" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding Settings.MusicLevel, Mode=TwoWay}" />
+                  </StackPanel>
+                  <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Spacing="7" Margin="0,14,0,0"><TextBlock Text="Font" Classes="muted" FontSize="12" /><ComboBox x:Name="FontPicker" ItemsSource="{Binding Settings.Fonts}" SelectedValueBinding="{Binding Value}" SelectedValue="{Binding Settings.Font, Mode=TwoWay}" /></StackPanel>
+                  <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Spacing="7" Margin="0,14,0,0">
+                    <Grid ColumnDefinitions="*,Auto"><TextBlock Text="RmlUi scale · 100–200" Classes="muted" FontSize="12" /><TextBlock Grid.Column="1" Text="{Binding Settings.RmlScale}" /></Grid>
+                    <Slider Minimum="100" Maximum="200" TickFrequency="5" IsSnapToTickEnabled="True" Value="{Binding Settings.RmlScale, Mode=TwoWay}" />
+                  </StackPanel>
+                  <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Spacing="7" Margin="0,14,0,0">
+                    <Grid ColumnDefinitions="*,Auto"><TextBlock Text="Control UI scale · 100–200" Classes="muted" FontSize="12" /><TextBlock Grid.Column="1" Text="{Binding Settings.ControlUiScale}" /></Grid>
+                    <Slider Minimum="100" Maximum="200" TickFrequency="5" IsSnapToTickEnabled="True" Value="{Binding Settings.ControlUiScale, Mode=TwoWay}" />
+                  </StackPanel>
+                  <CheckBox Grid.Row="5" Grid.ColumnSpan="2" Content="Windowed mode" IsChecked="{Binding Settings.Windowed, Mode=TwoWay}" Margin="0,14,0,0" />
+                </Grid>
+              </StackPanel>
+            </Expander>
+            <Expander Header="config.ini" HorizontalAlignment="Stretch">
+              <TextBox Text="{Binding Settings.RawText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" AcceptsReturn="True" FontFamily="Cascadia Mono, Consolas, monospace" FontSize="12" MinHeight="290" MaxHeight="440" />
+            </Expander>
+            <Button Classes="primary" Content="Save client settings" Click="SaveSettings" HorizontalAlignment="Right" />
+          </StackPanel>
+        </Grid>
+      </ScrollViewer>
+            <Border Grid.Row="0" Classes="card" IsVisible="{Binding PlayVisible}" Margin="0,0,0,18">
+              <StackPanel Spacing="13">
+                <TextBlock Text="SESSION PRESET" Classes="eyebrow" />
+                <ComboBox ItemsSource="{Binding LaunchPresets}" SelectedItem="{Binding LaunchPreset, Mode=TwoWay}" />
+                <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
+                  <Button Classes="primary" Content="Start game   →" HorizontalAlignment="Stretch" FontSize="17" Padding="24,16" Click="StartGame" />
+                  <Button Grid.Column="1" Content="Exit launcher" Margin="12,0,0,0" Click="ExitLauncher" />
+                </Grid>
+              </StackPanel>
+            </Border>
+      <TextBlock Grid.Row="2" Text="{Binding Notice}" Foreground="#E3B879" TextWrapping="Wrap" FontSize="12" Margin="0,18,0,0" />
+    </Grid>
+  </Grid>
+</UserControl>

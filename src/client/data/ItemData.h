@@ -1,0 +1,1279 @@
+#pragma once
+#define MAX_GIFT_MESSAGE_SIZE 200
+
+#include "support/CoreMath.h"
+#include "data/Localization.h"
+
+#include <stdio.h>
+#include <array>
+#include <memory>
+#include <algorithm>
+#include <cstdint>
+#include <cstdio>
+#include <cstring>
+#include <cwchar>
+#include <iterator>
+#include <string>
+#include <vector>
+
+constexpr int MAX_ITEM_TYPE = 16;
+
+constexpr int MAX_ITEM_INDEX = 512;
+
+constexpr int MAX_ITEM = MAX_ITEM_TYPE * MAX_ITEM_INDEX;
+
+constexpr int ITEM_GROUP_SWORD = 0;
+constexpr int ITEM_GROUP_AXE = 1;
+constexpr int ITEM_GROUP_MACE = 2;
+constexpr int ITEM_GROUP_SPEAR = 3;
+constexpr int ITEM_GROUP_BOW = 4;
+constexpr int ITEM_GROUP_STAFF = 5;
+constexpr int ITEM_GROUP_SHIELD = 6;
+constexpr int ITEM_GROUP_HELM = 7;
+constexpr int ITEM_GROUP_ARMOR = 8;
+constexpr int ITEM_GROUP_PANTS = 9;
+constexpr int ITEM_GROUP_GLOVES = 10;
+constexpr int ITEM_GROUP_BOOTS = 11;
+constexpr int ITEM_GROUP_WING = 12;
+constexpr int ITEM_GROUP_HELPER = 13;
+constexpr int ITEM_GROUP_POTION = 14;
+constexpr int ITEM_GROUP_ETC = 15;
+
+#pragma pack(push)
+#pragma pack()
+constexpr auto INGAMESHOP_DISPLAY_ITEMLIST_SIZE = (9);
+#pragma pack(pop)
+
+#pragma pack(push)
+#pragma pack()
+#define MAX_BUFF_SLOT_INDEX 16
+
+#pragma pack(pop)
+
+#pragma pack(push)
+#pragma pack()
+enum ItemOptionFlags : BYTE
+{
+    None = 0x00,
+    HasOption = 0x01,
+    HasLuck = 0x02,
+    HasSkill = 0x04,
+    HasExcellent = 0x08,
+    HasAncient = 0x10,
+    HasHarmony = 0x20,
+    HasGuardian = 0x40,
+    HasSockets = 0x80,
+};
+#pragma pack(pop)
+
+DEFINE_ENUM_FLAG_OPERATORS(ItemOptionFlags);
+#define g_ItemDataHandler CItemDataHandler::GetInstance()
+#define FIELD_TYPE_Bool bool
+#define FIELD_TYPE_Byte BYTE
+#define FIELD_TYPE_Word WORD
+#define FIELD_TYPE_Int int
+#define FIELD_TYPE_DWord DWORD
+#define ITEM_TYPE_CHARM_MIXWING ITEM_HELPER
+#define TRADE_BUY 0
+#define TRADE_SELL 1
+#define TRADE_REPAIR 2
+#define INVENTORY_SCALE 20
+#define COLUMN_INVENTORY 8
+#define ROW_INVENTORY 8
+#define COLUMN_SHOP_INVENTORY 8
+#define ROW_SHOP_INVENTORY 15
+#define COLUMN_TRADE_INVENTORY 8
+#define ROW_TRADE_INVENTORY 4
+#define COLUMN_MIX_INVENTORY 8
+#define ROW_MIX_INVENTORY 4
+#define ROW_INVENTORY_EXT 4
+#define MAX_INVENTORY_EXT_COUNT 4
+#define MAX_INVENTORY (COLUMN_INVENTORY * ROW_INVENTORY)
+#define MAX_INVENTORY_EXT_ONE (COLUMN_INVENTORY * ROW_INVENTORY_EXT)
+#define MAX_INVENTORY_EXT (MAX_INVENTORY_EXT_ONE * MAX_INVENTORY_EXT_COUNT)
+#define MAX_SHOP_INVENTORY (COLUMN_SHOP_INVENTORY * ROW_SHOP_INVENTORY)
+#define MAX_TRADE_INVENTORY (COLUMN_TRADE_INVENTORY * ROW_TRADE_INVENTORY)
+#define MAX_MIX_INVENTORY (COLUMN_MIX_INVENTORY * ROW_MIX_INVENTORY)
+#define EQUIPMENT_WEAPON_RIGHT 0
+#define EQUIPMENT_WEAPON_LEFT 1
+#define EQUIPMENT_HELM 2
+#define EQUIPMENT_ARMOR 3
+#define EQUIPMENT_PANTS 4
+#define EQUIPMENT_GLOVES 5
+#define EQUIPMENT_BOOTS 6
+#define EQUIPMENT_WING 7
+#define EQUIPMENT_HELPER 8
+#define EQUIPMENT_AMULET 9
+#define EQUIPMENT_RING_RIGHT 10
+#define EQUIPMENT_RING_LEFT 11
+#define MAX_EQUIPMENT 12
+#define MAX_EQUIPMENT_INDEX MAX_EQUIPMENT
+#define MAX_MY_INVENTORY_INDEX (MAX_EQUIPMENT_INDEX + MAX_INVENTORY)
+#define MAX_MY_INVENTORY_EX_INDEX (MAX_MY_INVENTORY_INDEX + MAX_INVENTORY_EXT)
+#define MAX_SETITEM_OPTIONS 12
+#define MAX_MY_SHOP_INVENTORY_INDEX (MAX_MY_INVENTORY_EX_INDEX + MAX_SHOP_INVENTORY)
+#define MAX_SHOPTITLE 36
+#define COL_PERSONALSHOP_INVEN 8
+#define ROW_PERSONALSHOP_INVEN 4
+#define MAX_PERSONALSHOP_INVEN COL_PERSONALSHOP_INVEN *ROW_PERSONALSHOP_INVEN
+#define MAX_KEYPADINPUT (10)
+#define MAX_MINI_MAP_DATA 100
+#define MAX_ITEM_SPECIAL 8
+#define ITEM_LEVEL_NORMAL 4
+#define MAX_QUEST_ITEM 64
+#define MAX_EVENT_ITEM 35
+#define MAX_SOCKETS 5
+#define SOCKET_EMPTY 0xFE
+#define ITEM_SWORD (ITEM_GROUP_SWORD)
+#define ITEM_AXE (ITEM_GROUP_AXE * MAX_ITEM_INDEX)
+#define ITEM_MACE (ITEM_GROUP_MACE * MAX_ITEM_INDEX)
+#define ITEM_SPEAR (ITEM_GROUP_SPEAR * MAX_ITEM_INDEX)
+#define ITEM_BOW (ITEM_GROUP_BOW * MAX_ITEM_INDEX)
+#define ITEM_STAFF (ITEM_GROUP_STAFF * MAX_ITEM_INDEX)
+#define ITEM_SHIELD (ITEM_GROUP_SHIELD * MAX_ITEM_INDEX)
+#define ITEM_HELM (ITEM_GROUP_HELM * MAX_ITEM_INDEX)
+#define ITEM_ARMOR (ITEM_GROUP_ARMOR * MAX_ITEM_INDEX)
+#define ITEM_PANTS (ITEM_GROUP_PANTS * MAX_ITEM_INDEX)
+#define ITEM_GLOVES (ITEM_GROUP_GLOVES * MAX_ITEM_INDEX)
+#define ITEM_BOOTS (ITEM_GROUP_BOOTS * MAX_ITEM_INDEX)
+#define ITEM_WING (ITEM_GROUP_WING * MAX_ITEM_INDEX)
+#define ITEM_HELPER (ITEM_GROUP_HELPER * MAX_ITEM_INDEX)
+#define ITEM_POTION (ITEM_GROUP_POTION * MAX_ITEM_INDEX)
+#define ITEM_ETC (ITEM_GROUP_ETC * MAX_ITEM_INDEX)
+#define ITEM_ZEN (ITEM_POTION + 15)
+
+struct ITEM_ATTRIBUTE;
+
+class CErrorReport;
+
+class CItemDataHandler
+{
+  public:
+    static CItemDataHandler &GetInstance();
+
+    // Data Operations - delegates to specialized classes
+    bool Load(wchar_t *fileName, CErrorReport &errorReport, HWND window);
+
+    // Data Access
+    ITEM_ATTRIBUTE *GetItemAttributes();
+    ITEM_ATTRIBUTE *GetItemAttribute(int index);
+    int GetItemCount() const;
+
+  private:
+    CItemDataHandler();
+    ~CItemDataHandler() = default;
+
+    // Prevent copying
+    CItemDataHandler(const CItemDataHandler &) = delete;
+    CItemDataHandler &operator=(const CItemDataHandler &) = delete;
+};
+
+// Forward declarations for constants
+#ifndef MAX_CLASS
+#define MAX_CLASS 7
+#endif
+
+#ifndef MAX_RESISTANCE
+#define MAX_RESISTANCE 7
+#endif
+
+#ifndef MAX_ITEM_NAME
+#define MAX_ITEM_NAME 50
+#endif
+
+// Include X-macro field definitions (single source of truth)
+
+// X-Macro definition for all ITEM_ATTRIBUTE fields (except Name which is special)
+// Format: X(FieldName, TypeEnum, ArraySize, DefaultColumnWidth, I18nMetadataName)
+// I18nMetadataName is the bare identifier inside namespace I18N::Metadata that
+// holds the localized display label for this field.
+// This is the SINGLE SOURCE OF TRUTH for field definitions.
+
+#define ITEM_FIELDS_SIMPLE(X)                                                                      \
+    X(TwoHand, Bool, 1, 70.0f, TwoHand)                                                            \
+    X(Level, Word, 1, 60.0f, Level)                                                                \
+    X(m_byItemSlot, Byte, 1, 60.0f, Slot)                                                          \
+    X(m_wSkillIndex, Word, 1, 60.0f, Skill)                                                        \
+    X(Width, Byte, 1, 60.0f, Width)                                                                \
+    X(Height, Byte, 1, 60.0f, Height)                                                              \
+    X(DamageMin, Byte, 1, 70.0f, MinDamage)                                                        \
+    X(DamageMax, Byte, 1, 70.0f, MaxDamage)                                                        \
+    X(SuccessfulBlocking, Byte, 1, 70.0f, BlockRate)                                               \
+    X(Defense, Byte, 1, 70.0f, Defense)                                                            \
+    X(MagicDefense, Byte, 1, 80.0f, MagicDefense)                                                  \
+    X(WeaponSpeed, Byte, 1, 80.0f, AttackSpeed)                                                    \
+    X(WalkSpeed, Byte, 1, 80.0f, MoveSpeed)                                                        \
+    X(Durability, Byte, 1, 70.0f, Durability)                                                      \
+    X(MagicDur, Byte, 1, 90.0f, MagicDurability)                                                   \
+    X(MagicPower, Byte, 1, 80.0f, MagicPower)                                                      \
+    X(RequireStrength, Word, 1, 80.0f, ReqStrength)                                                \
+    X(RequireDexterity, Word, 1, 80.0f, ReqDexterity)                                              \
+    X(RequireEnergy, Word, 1, 80.0f, ReqEnergy)                                                    \
+    X(RequireVitality, Word, 1, 80.0f, ReqVitality)                                                \
+    X(RequireCharisma, Word, 1, 90.0f, ReqLeadership)                                              \
+    X(RequireLevel, Word, 1, 70.0f, ReqLevel)                                                      \
+    X(Value, Byte, 1, 70.0f, SellValue)                                                            \
+    X(iZen, Int, 1, 80.0f, BuyPrice)                                                               \
+    X(AttType, Byte, 1, 80.0f, AttackType)
+
+// Array fields defined with index notation for metadata
+// Format: X(FieldNameWithIndex, BaseFieldName, Index, TypeEnum, DefaultColumnWidth, I18nMetadataName)
+#define ITEM_FIELDS_ARRAYS(X)                                                                      \
+    X(RequireClass[0], RequireClass, 0, Byte, 60.0f, DWSM)                                         \
+    X(RequireClass[1], RequireClass, 1, Byte, 60.0f, DKBK)                                         \
+    X(RequireClass[2], RequireClass, 2, Byte, 65.0f, ELFME)                                        \
+    X(RequireClass[3], RequireClass, 3, Byte, 60.0f, MGDM)                                         \
+    X(RequireClass[4], RequireClass, 4, Byte, 60.0f, DLLE)                                         \
+    X(RequireClass[5], RequireClass, 5, Byte, 65.0f, SUMBS)                                        \
+    X(RequireClass[6], RequireClass, 6, Byte, 60.0f, RFFM)                                         \
+    X(Resistance[0], Resistance, 0, Byte, 65.0f, IceResistance)                                    \
+    X(Resistance[1], Resistance, 1, Byte, 75.0f, PoisonResistance)                                 \
+    X(Resistance[2], Resistance, 2, Byte, 85.0f, LightningResistance)                              \
+    X(Resistance[3], Resistance, 3, Byte, 65.0f, FireResistance)                                   \
+    X(Resistance[4], Resistance, 4, Byte, 70.0f, EarthResistance)                                  \
+    X(Resistance[5], Resistance, 5, Byte, 70.0f, WindResistance)                                   \
+    X(Resistance[6], Resistance, 6, Byte, 75.0f, WaterResistance)                                  \
+    X(Resistance[7], Resistance, 7, Byte, 60.0f, Resistance7)
+
+// Helper macro to convert TypeEnum to actual C++ type
+
+// Generate struct field declarations from X-macro. The i18nName parameter
+// only matters for descriptor generation; the struct layout ignores it.
+#define DECLARE_FIELD(name, type, arraySize, width, i18nName) FIELD_TYPE_##type name;
+
+// Macro to generate all non-array fields for struct definition
+#define ITEM_ATTRIBUTE_FIELDS                                                                      \
+    ITEM_FIELDS_SIMPLE(DECLARE_FIELD)                                                              \
+    BYTE RequireClass[MAX_CLASS];                                                                  \
+    BYTE Resistance[MAX_RESISTANCE + 1];
+
+// EDITOR METADATA - Defined in ItemFieldMetadata.h (after ITEM_ATTRIBUTE is defined)
+// Note: Editor-specific types (EItemFieldType, FieldDescriptor, etc.) are defined
+// in ItemFieldMetadata.h to avoid circular dependencies
+
+// Legacy file format structure (S6E3) with 30-byte name
+// Used for backward compatibility with old BMD files
+typedef struct
+{
+    char Name[30];
+    ITEM_ATTRIBUTE_FIELDS
+} ITEM_ATTRIBUTE_FILE_LEGACY;
+
+// Current file format structure with MAX_ITEM_NAME byte name
+// Used for reading/writing BMD files
+typedef struct
+{
+    char Name[MAX_ITEM_NAME];
+    ITEM_ATTRIBUTE_FIELDS
+} ITEM_ATTRIBUTE_FILE;
+
+// Runtime structure with wide-character name
+// Used in-memory during gameplay
+typedef struct ITEM_ATTRIBUTE
+{
+    wchar_t Name[MAX_ITEM_NAME];
+    ITEM_ATTRIBUTE_FIELDS
+} ITEM_ATTRIBUTE;
+
+// COPY HELPERS (replaces ItemAttributeHelpers.h)
+
+// Generate field copy statements from X-macro
+#define COPY_FIELD(name, type, arraySize, width, i18nName) (dest).name = (source).name;
+
+// Macro to copy all non-name fields from source to dest
+#define COPY_ITEM_ATTRIBUTE_FIELDS(dest, source)                                                   \
+    do                                                                                             \
+    {                                                                                              \
+        ITEM_FIELDS_SIMPLE(COPY_FIELD)                                                             \
+        memcpy((dest).RequireClass, (source).RequireClass, sizeof((source).RequireClass));         \
+        memcpy((dest).Resistance, (source).Resistance, sizeof((source).Resistance));               \
+    } while (0)
+
+// Helper template to copy from file structure to runtime structure
+// Requires: #include "Data/Translation/MultiLanguage.h"
+template <typename TSource>
+inline void CopyItemAttributeFromSource(ITEM_ATTRIBUTE &dest, const TSource &source)
+{
+    CMultiLanguage::ConvertFromUtf8(dest.Name, source.Name, MAX_ITEM_NAME);
+    COPY_ITEM_ATTRIBUTE_FIELDS(dest, source);
+}
+
+// Helper template to copy from runtime structure to file structure
+// Requires: #include "Data/Translation/MultiLanguage.h"
+template <typename TDest>
+inline void CopyItemAttributeToDestination(TDest &dest, const ITEM_ATTRIBUTE &source)
+{
+    CMultiLanguage::ConvertToUtf8(dest.Name, source.Name, sizeof(dest.Name));
+    COPY_ITEM_ATTRIBUTE_FIELDS(dest, source);
+}
+
+class CErrorReport;
+
+// Item Data Loading Operations
+class ItemDataLoader
+{
+  public:
+    explicit ItemDataLoader(ITEM_ATTRIBUTE *&itemAttribute) noexcept : ItemAttribute(itemAttribute)
+    {
+    }
+
+    bool Load(wchar_t *fileName, CErrorReport &errorReport, HWND window);
+
+  private:
+    bool LoadLegacyFormat(FILE *fp, long fileSize, CErrorReport &errorReport, HWND window);
+    bool LoadNewFormat(FILE *fp, long fileSize, CErrorReport &errorReport, HWND window);
+
+    // Template for loading item data with different format structures
+    template <typename TFileFormat>
+    bool LoadFormat(FILE *fp, const wchar_t *formatName, CErrorReport &errorReport, HWND window);
+
+    ITEM_ATTRIBUTE *&ItemAttribute;
+};
+
+namespace UI::Items
+{
+struct ItemSlotTrs final
+{
+    std::array<float, 2> position;
+    std::array<float, 3> rotation;
+    float scale;
+    static void EnsureLoaded();
+    static const ItemSlotTrs *Find(int itemId);
+};
+} // namespace UI::Items
+
+enum
+{
+    ITEM_NUMBER_DARK_SPIRIT = 5,
+};
+enum
+{
+    ITEM_KRIS = ITEM_SWORD + 0,
+    ITEM_SHORT_SWORD = ITEM_SWORD + 1,
+    ITEM_RAPIER = ITEM_SWORD + 2,
+    ITEM_KATACHE = ITEM_SWORD + 3,
+    ITEM_SWORD_OF_ASSASSIN = ITEM_SWORD + 4,
+    ITEM_BLADE = ITEM_SWORD + 5,
+    ITEM_GLADIUS = ITEM_SWORD + 6,
+    ITEM_FALCHION = ITEM_SWORD + 7,
+    ITEM_SERPENT_SWORD = ITEM_SWORD + 8,
+    ITEM_SWORD_OF_SALAMANDER = ITEM_SWORD + 9,
+    ITEM_LIGHT_SABER = ITEM_SWORD + 10,
+    ITEM_LEGENDARY_SWORD = ITEM_SWORD + 11,
+    ITEM_HELIACAL_SWORD = ITEM_SWORD + 12,
+    ITEM_DOUBLE_BLADE = ITEM_SWORD + 13,
+    ITEM_LIGHTING_SWORD = ITEM_SWORD + 14,
+    ITEM_GIANT_SWORD = ITEM_SWORD + 15,
+    ITEM_SWORD_OF_DESTRUCTION = ITEM_SWORD + 16,
+    ITEM_DARK_BREAKER = ITEM_SWORD + 17,
+    ITEM_THUNDER_BLADE = ITEM_SWORD + 18,
+    ITEM_DIVINE_SWORD_OF_ARCHANGEL = ITEM_SWORD + 19,
+    ITEM_KNIGHT_BLADE = ITEM_SWORD + 20,
+    ITEM_DARK_REIGN_BLADE = ITEM_SWORD + 21,
+    ITEM_BONE_BLADE = ITEM_SWORD + 22,
+    ITEM_EXPLOSION_BLADE = ITEM_SWORD + 23,
+    ITEM_DAYBREAK = ITEM_SWORD + 24,
+    ITEM_SWORD_DANCER = ITEM_SWORD + 25,
+    ITEM_FLAMBERGE = ITEM_SWORD + 26,
+    ITEM_SWORD_BREAKER = ITEM_SWORD + 27,
+    ITEM_IMPERIAL_SWORD = ITEM_SWORD + 28,
+    ITEM_RUNE_BLADE = ITEM_SWORD + 31,
+    ITEM_SACRED_GLOVE = ITEM_SWORD + 32,
+    ITEM_STORM_HARD_GLOVE = ITEM_SWORD + 33,
+    ITEM_PIERCING_BLADE_GLOVE = ITEM_SWORD + 34,
+    ITEM_PHOENIX_SOUL_STAR = ITEM_SWORD + 35,
+    ITEM_SMALL_AXE = ITEM_AXE + 0,
+    ITEM_HAND_AXE = ITEM_AXE + 1,
+    ITEM_DOUBLE_AXE = ITEM_AXE + 2,
+    ITEM_TOMAHAWK = ITEM_AXE + 3,
+    ITEM_ELVEN_AXE = ITEM_AXE + 4,
+    ITEM_BATTLE_AXE = ITEM_AXE + 5,
+    ITEM_NIKKEA_AXE = ITEM_AXE + 6,
+    ITEM_LARKAN_AXE = ITEM_AXE + 7,
+    ITEM_CRESCENT_AXE = ITEM_AXE + 8,
+    ITEM_SMALLMACE = ITEM_MACE + 0,
+    ITEM_MORNING_STAR = ITEM_MACE + 1,
+    ITEM_FLAIL = ITEM_MACE + 2,
+    ITEM_GREAT_HAMMER = ITEM_MACE + 3,
+    ITEM_CRYSTAL_MORNING_STAR = ITEM_MACE + 4,
+    ITEM_CRYSTAL_SWORD = ITEM_MACE + 5,
+    ITEM_CHAOS_DRAGON_AXE = ITEM_MACE + 6,
+    ITEM_ELEMENTAL_MACE = ITEM_MACE + 7,
+    ITEM_BATTLE_SCEPTER = ITEM_MACE + 8,
+    ITEM_MASTER_SCEPTER = ITEM_MACE + 9,
+    ITEM_GREAT_SCEPTER = ITEM_MACE + 10,
+    ITEM_LORD_SCEPTER = ITEM_MACE + 11,
+    ITEM_GREAT_LORD_SCEPTER = ITEM_MACE + 12,
+    ITEM_DIVINE_SCEPTER_OF_ARCHANGEL = ITEM_MACE + 13,
+    ITEM_SOLEIL_SCEPTER = ITEM_MACE + 14,
+    ITEM_SHINING_SCEPTER = ITEM_MACE + 15,
+    ITEM_FROST_MACE = ITEM_MACE + 16,
+    ITEM_ABSOLUTE_SCEPTER = ITEM_MACE + 17,
+    ITEM_STRYKER_SCEPTER = ITEM_MACE + 18,
+    ITEM_LIGHT_SPEAR = ITEM_SPEAR + 0,
+    ITEM__SPEAR = ITEM_SPEAR + 1,
+    ITEM_DRAGON_LANCE = ITEM_SPEAR + 2,
+    ITEM_GIANT_TRIDENT = ITEM_SPEAR + 3,
+    ITEM_SERPENT_SPEAR = ITEM_SPEAR + 4,
+    ITEM_DOUBLE_POLEAXE = ITEM_SPEAR + 5,
+    ITEM_HALBERD = ITEM_SPEAR + 6,
+    ITEM_BERDYSH = ITEM_SPEAR + 7,
+    ITEM_GREAT_SCYTHE = ITEM_SPEAR + 8,
+    ITEM_BILL_OF_BALROG = ITEM_SPEAR + 9,
+    ITEM_DRAGON_SPEAR = ITEM_SPEAR + 10,
+    ITEM_BEUROBA = ITEM_SPEAR + 11,
+    ITEM_SHORT_BOW = ITEM_BOW + 0,
+    ITEM_SMALL_BOW = ITEM_BOW + 1,
+    ITEM_ELVEN_BOW = ITEM_BOW + 2,
+    ITEM_BATTLE_BOW = ITEM_BOW + 3,
+    ITEM_TIGER_BOW = ITEM_BOW + 4,
+    ITEM_SILVER_BOW = ITEM_BOW + 5,
+    ITEM_CHAOS_NATURE_BOW = ITEM_BOW + 6,
+    ITEM_BOLT = ITEM_BOW + 7,
+    ITEM_CROSSBOW = ITEM_BOW + 8,
+    ITEM_GOLDEN_CROSSBOW = ITEM_BOW + 9,
+    ITEM_ARQUEBUS = ITEM_BOW + 10,
+    ITEM_LIGHT_CROSSBOW = ITEM_BOW + 11,
+    ITEM_SERPENT_CROSSBOW = ITEM_BOW + 12,
+    ITEM_BLUEWING_CROSSBOW = ITEM_BOW + 13,
+    ITEM_AQUAGOLD_CROSSBOW = ITEM_BOW + 14,
+    ITEM_ARROWS = ITEM_BOW + 15,
+    ITEM_SAINT_CROSSBOW = ITEM_BOW + 16,
+    ITEM_CELESTIAL_BOW = ITEM_BOW + 17,
+    ITEM_DIVINE_CB_OF_ARCHANGEL = ITEM_BOW + 18,
+    ITEM_GREAT_REIGN_CROSSBOW = ITEM_BOW + 19,
+    ITEM_ARROW_VIPER_BOW = ITEM_BOW + 20,
+    ITEM_SYLPH_WIND_BOW = ITEM_BOW + 21,
+    ITEM_ALBATROSS_BOW = ITEM_BOW + 22,
+    ITEM_STINGER_BOW = ITEM_BOW + 23,
+    ITEM_AIR_LYN_BOW = ITEM_BOW + 24,
+    ITEM_SKULL_STAFF = ITEM_STAFF + 0,
+    ITEM_ANGELIC_STAFF = ITEM_STAFF + 1,
+    ITEM_SERPENT_STAFF = ITEM_STAFF + 2,
+    ITEM_THUNDER_STAFF = ITEM_STAFF + 3,
+    ITEM_GORGON_STAFF = ITEM_STAFF + 4,
+    ITEM_LEGENDARY_STAFF = ITEM_STAFF + 5,
+    ITEM_STAFF_OF_RESURRECTION = ITEM_STAFF + 6,
+    ITEM_CHAOS_LIGHTNING_STAFF = ITEM_STAFF + 7,
+    ITEM_STAFF_OF_DESTRUCTION = ITEM_STAFF + 8,
+    ITEM_DRAGON_SOUL_STAFF = ITEM_STAFF + 9,
+    ITEM_DIVINE_STAFF_OF_ARCHANGEL = ITEM_STAFF + 10,
+    ITEM_STAFF_OF_KUNDUN = ITEM_STAFF + 11,
+    ITEM_GRAND_VIPER_STAFF = ITEM_STAFF + 12,
+    ITEM_PLATINA_STAFF = ITEM_STAFF + 13,
+    ITEM_MISTERY_STICK = ITEM_STAFF + 14,
+    ITEM_VIOLENT_WIND_STICK = ITEM_STAFF + 15,
+    ITEM_RED_WING_STICK = ITEM_STAFF + 16,
+    ITEM_ANCIENT_STICK = ITEM_STAFF + 17,
+    ITEM_DEMONIC_STICK = ITEM_STAFF + 18,
+    ITEM_STORM_BLITZ_STICK = ITEM_STAFF + 19,
+    ITEM_ETERNAL_WING_STICK = ITEM_STAFF + 20,
+    ITEM_BOOK_OF_SAHAMUTT = ITEM_STAFF + 21,
+    ITEM_BOOK_OF_NEIL = ITEM_STAFF + 22,
+    ITEM_BOOK_OF_LAGLE = ITEM_STAFF + 23,
+    ITEM_DEADLY_STAFF = ITEM_STAFF + 30,
+    ITEM_IMPERIAL_STAFF = ITEM_STAFF + 31,
+    ITEM_CHROMATIC_STAFF = ITEM_STAFF + 33,
+    ITEM_RAVEN_STICK = ITEM_STAFF + 34,
+    ITEM_DIVINE_STICK_OF_ARCHANGEL = ITEM_STAFF + 36,
+    ITEM_SMALL_SHIELD = ITEM_SHIELD + 0,
+    ITEM_HORN_SHIELD = ITEM_SHIELD + 1,
+    ITEM_KITE_SHIELD = ITEM_SHIELD + 2,
+    ITEM_ELVEN_SHIELD = ITEM_SHIELD + 3,
+    ITEM_BUCKLER = ITEM_SHIELD + 4,
+    ITEM_DRAGON_SLAYER_SHIELD = ITEM_SHIELD + 5,
+    ITEM_SKULL_SHIELD = ITEM_SHIELD + 6,
+    ITEM_SPIKED_SHIELD = ITEM_SHIELD + 7,
+    ITEM_TOWER_SHIELD = ITEM_SHIELD + 8,
+    ITEM_PLATE_SHIELD = ITEM_SHIELD + 9,
+    ITEM_BIG_ROUND_SHIELD = ITEM_SHIELD + 10,
+    ITEM_SERPENT_SHIELD = ITEM_SHIELD + 11,
+    ITEM_BRONZE_SHIELD = ITEM_SHIELD + 12,
+    ITEM_DRAGON_SHIELD = ITEM_SHIELD + 13,
+    ITEM_LEGENDARY_SHIELD = ITEM_SHIELD + 14,
+    ITEM_GRAND_SOUL_SHIELD = ITEM_SHIELD + 15,
+    ITEM_ELEMENTAL_SHIELD = ITEM_SHIELD + 16,
+    ITEM_CRIMSONGLORY = ITEM_SHIELD + 17,
+    ITEM_SALAMANDER_SHIELD = ITEM_SHIELD + 18,
+    ITEM_FROST_BARRIER = ITEM_SHIELD + 19,
+    ITEM_GUARDIAN_SHILED = ITEM_SHIELD + 20,
+    ITEM_CROSS_SHIELD = ITEM_SHIELD + 21,
+    ITEM_BRONZE_HELM = ITEM_HELM + 0,
+    ITEM_DRAGON_HELM = ITEM_HELM + 1,
+    ITEM_PAD_HELM = ITEM_HELM + 2,
+    ITEM_LEGENDARY_HELM = ITEM_HELM + 3,
+    ITEM_BONE_HELM = ITEM_HELM + 4,
+    ITEM_LEATHER_HELM = ITEM_HELM + 5,
+    ITEM_SCALE_HELM = ITEM_HELM + 6,
+    ITEM_SPHINX_MASK = ITEM_HELM + 7,
+    ITEM_BRASS_HELM = ITEM_HELM + 8,
+    ITEM_PLATE_HELM = ITEM_HELM + 9,
+    ITEM_VINE_HELM = ITEM_HELM + 10,
+    ITEM_SILK_HELM = ITEM_HELM + 11,
+    ITEM_WIND_HELM = ITEM_HELM + 12,
+    ITEM_SPIRIT_HELM = ITEM_HELM + 13,
+    ITEM_GUARDIAN_HELM = ITEM_HELM + 14,
+    ITEM_BLACK_DRAGON_HELM = ITEM_HELM + 16,
+    ITEM_DARK_PHOENIX_HELM = ITEM_HELM + 17,
+    ITEM_GRAND_SOUL_HELM = ITEM_HELM + 18,
+    ITEM_DIVINE_HELM = ITEM_HELM + 19,
+    ITEM_GREAT_DRAGON_HELM = ITEM_HELM + 21,
+    ITEM_DARK_SOUL_HELM = ITEM_HELM + 22,
+    ITEM_RED_SPIRIT_HELM = ITEM_HELM + 24,
+    ITEM_LIGHT_PLATE_MASK = ITEM_HELM + 25,
+    ITEM_ADAMANTINE_MASK = ITEM_HELM + 26,
+    ITEM_DARK_STEEL_MASK = ITEM_HELM + 27,
+    ITEM_DARK_MASTER_MASK = ITEM_HELM + 28,
+    ITEM_DRAGON_KNIGHT_HELM = ITEM_HELM + 29,
+    ITEM_VENOM_MIST_HELM = ITEM_HELM + 30,
+    ITEM_SYLPHID_RAY_HELM = ITEM_HELM + 31,
+    ITEM_SUNLIGHT_MASK = ITEM_HELM + 33,
+    ITEM_ASHCROW_HELM = ITEM_HELM + 34,
+    ITEM_ECLIPSE_HELM = ITEM_HELM + 35,
+    ITEM_IRIS_HELM = ITEM_HELM + 36,
+    ITEM_GLORIOUS_MASK = ITEM_HELM + 38,
+    ITEM_MISTERY_HELM = ITEM_HELM + 39,
+    ITEM_RED_WING_HELM = ITEM_HELM + 40,
+    ITEM_ANCIENT_HELM = ITEM_HELM + 41,
+    ITEM_BLACK_ROSE_HELM = ITEM_HELM + 42,
+    ITEM_AURA_HELM = ITEM_HELM + 43,
+    ITEM_LILIUM_HELM = ITEM_HELM + 44,
+    ITEM_TITAN_HELM = ITEM_HELM + 45,
+    ITEM_BRAVE_HELM = ITEM_HELM + 46,
+    ITEM_SERAPHIM_HELM = ITEM_HELM + 49,
+    ITEM_FAITH_HELM = ITEM_HELM + 50,
+    ITEM_PAEWANG_MASK = ITEM_HELM + 51,
+    ITEM_HADES_HELM = ITEM_HELM + 52,
+    ITEM_SACRED_HELM = ITEM_HELM + 59,
+    ITEM_STORM_HARD_HELM = ITEM_HELM + 60,
+    ITEM_PIERCING_HELM = ITEM_HELM + 61,
+    ITEM_PHOENIX_SOUL_HELMET = ITEM_HELM + 73,
+    ITEM_BRONZE_ARMOR = ITEM_ARMOR + 0,
+    ITEM_DRAGON_ARMOR = ITEM_ARMOR + 1,
+    ITEM_PAD_ARMOR = ITEM_ARMOR + 2,
+    ITEM_LEGENDARY_ARMOR = ITEM_ARMOR + 3,
+    ITEM_BONE_ARMOR = ITEM_ARMOR + 4,
+    ITEM_LEATHER_ARMOR = ITEM_ARMOR + 5,
+    ITEM_SCALE_ARMOR = ITEM_ARMOR + 6,
+    ITEM_SPHINX_ARMOR = ITEM_ARMOR + 7,
+    ITEM_BRASS_ARMOR = ITEM_ARMOR + 8,
+    ITEM_PLATE_ARMOR = ITEM_ARMOR + 9,
+    ITEM_VINE_ARMOR = ITEM_ARMOR + 10,
+    ITEM_SILK_ARMOR = ITEM_ARMOR + 11,
+    ITEM_WIND_ARMOR = ITEM_ARMOR + 12,
+    ITEM_SPIRIT_ARMOR = ITEM_ARMOR + 13,
+    ITEM_GUARDIAN_ARMOR = ITEM_ARMOR + 14,
+    ITEM_STORM_CROW_ARMOR = ITEM_ARMOR + 15,
+    ITEM_BLACK_DRAGON_ARMOR = ITEM_ARMOR + 16,
+    ITEM_DARK_PHOENIX_ARMOR = ITEM_ARMOR + 17,
+    ITEM_GRAND_SOUL_ARMOR = ITEM_ARMOR + 18,
+    ITEM_DIVINE_ARMOR = ITEM_ARMOR + 19,
+    ITEM_THUNDER_HAWK_ARMOR = ITEM_ARMOR + 20,
+    ITEM_GREAT_DRAGON_ARMOR = ITEM_ARMOR + 21,
+    ITEM_DARK_SOUL_ARMOR = ITEM_ARMOR + 22,
+    ITEM_HURRICANE_ARMOR = ITEM_ARMOR + 23,
+    ITEM_RED_SPRIT_ARMOR = ITEM_ARMOR + 24,
+    ITEM_LIGHT_PLATE_ARMOR = ITEM_ARMOR + 25,
+    ITEM_ADAMANTINE_ARMOR = ITEM_ARMOR + 26,
+    ITEM_DARK_STEEL_ARMOR = ITEM_ARMOR + 27,
+    ITEM_DARK_MASTER_ARMOR = ITEM_ARMOR + 28,
+    ITEM_DRAGON_KNIGHT_ARMOR = ITEM_ARMOR + 29,
+    ITEM_VENOM_MIST_ARMOR = ITEM_ARMOR + 30,
+    ITEM_SYLPHID_RAY_ARMOR = ITEM_ARMOR + 31,
+    ITEM_VOLCANO_ARMOR = ITEM_ARMOR + 32,
+    ITEM_SUNLIGHT_ARMOR = ITEM_ARMOR + 33,
+    ITEM_ASHCROW_ARMOR = ITEM_ARMOR + 34,
+    ITEM_ECLIPSE_ARMOR = ITEM_ARMOR + 35,
+    ITEM_IRIS_ARMOR = ITEM_ARMOR + 36,
+    ITEM_VALIANT_ARMOR = ITEM_ARMOR + 37,
+    ITEM_GLORIOUS_ARMOR = ITEM_ARMOR + 38,
+    ITEM_MISTERY_ARMOR = ITEM_ARMOR + 39,
+    ITEM_RED_WING_ARMOR = ITEM_ARMOR + 40,
+    ITEM_ANCIENT_ARMOR = ITEM_ARMOR + 41,
+    ITEM_BLACK_ROSE_ARMOR = ITEM_ARMOR + 42,
+    ITEM_AURA_ARMOR = ITEM_ARMOR + 43,
+    ITEM_LILIUM_ARMOR = ITEM_ARMOR + 44,
+    ITEM_TITAN_ARMOR = ITEM_ARMOR + 45,
+    ITEM_BRAVE_ARMOR = ITEM_ARMOR + 46,
+    ITEM_DESTORY_ARMOR = ITEM_ARMOR + 47,
+    ITEM_PHANTOM_ARMOR = ITEM_ARMOR + 48,
+    ITEM_SERAPHIM_ARMOR = ITEM_ARMOR + 49,
+    ITEM_FAITH_ARMOR = ITEM_ARMOR + 50,
+    ITEM_PAEWANG_ARMOR = ITEM_ARMOR + 51,
+    ITEM_HADES_ARMOR = ITEM_ARMOR + 52,
+    ITEM_SACRED_ARMOR = ITEM_ARMOR + 59,
+    ITEM_STORM_HARD_ARMOR = ITEM_ARMOR + 60,
+    ITEM_PIERCING_ARMOR = ITEM_ARMOR + 61,
+    ITEM_PHOENIX_SOUL_ARMOR = ITEM_ARMOR + 73,
+    ITEM_BRONZE_PANTS = ITEM_PANTS + 0,
+    ITEM_DRAGON_PANTS = ITEM_PANTS + 1,
+    ITEM_PAD_PANTS = ITEM_PANTS + 2,
+    ITEM_LEGENDARY_PANTS = ITEM_PANTS + 3,
+    ITEM_BONE_PANTS = ITEM_PANTS + 4,
+    ITEM_LEATHER_PANTS = ITEM_PANTS + 5,
+    ITEM_SCALE_PANTS = ITEM_PANTS + 6,
+    ITEM_SPHINX_PANTS = ITEM_PANTS + 7,
+    ITEM_BRASS_PANTS = ITEM_PANTS + 8,
+    ITEM_PLATE_PANTS = ITEM_PANTS + 9,
+    ITEM_VINE_PANTS = ITEM_PANTS + 10,
+    ITEM_SILK_PANTS = ITEM_PANTS + 11,
+    ITEM_WIND_PANTS = ITEM_PANTS + 12,
+    ITEM_SPIRIT_PANTS = ITEM_PANTS + 13,
+    ITEM_GUARDIAN_PANTS = ITEM_PANTS + 14,
+    ITEM_STORM_CROW_PANTS = ITEM_PANTS + 15,
+    ITEM_BLACK_DRAGON_PANTS = ITEM_PANTS + 16,
+    ITEM_DARK_PHOENIX_PANTS = ITEM_PANTS + 17,
+    ITEM_GRAND_SOUL_PANTS = ITEM_PANTS + 18,
+    ITEM_DIVINE_PANTS = ITEM_PANTS + 19,
+    ITEM_THUNDER_HAWK_PANTS = ITEM_PANTS + 20,
+    ITEM_GREAT_DRAGON_PANTS = ITEM_PANTS + 21,
+    ITEM_DARK_SOUL_PANTS = ITEM_PANTS + 22,
+    ITEM_HURRICANE_PANTS = ITEM_PANTS + 23,
+    ITEM_RED_SPIRIT_PANTS = ITEM_PANTS + 24,
+    ITEM_LIGHT_PLATE_PANTS = ITEM_PANTS + 25,
+    ITEM_ADAMANTINE_PANTS = ITEM_PANTS + 26,
+    ITEM_DARK_STEEL_PANTS = ITEM_PANTS + 27,
+    ITEM_DARK_MASTER_PANTS = ITEM_PANTS + 28,
+    ITEM_DRAGON_KNIGHT_PANTS = ITEM_PANTS + 29,
+    ITEM_VENOM_MIST_PANTS = ITEM_PANTS + 30,
+    ITEM_SYLPHID_RAY_PANTS = ITEM_PANTS + 31,
+    ITEM_VOLCANO_PANTS = ITEM_PANTS + 32,
+    ITEM_SUNLIGHT_PANTS = ITEM_PANTS + 33,
+    ITEM_ASHCROW_PANTS = ITEM_PANTS + 34,
+    ITEM_ECLIPSE_PANTS = ITEM_PANTS + 35,
+    ITEM_IRIS_PANTS = ITEM_PANTS + 36,
+    ITEM_VALIANT_PANTS = ITEM_PANTS + 37,
+    ITEM_GLORIOUS_PANTS = ITEM_PANTS + 38,
+    ITEM_MISTERY_PANTS = ITEM_PANTS + 39,
+    ITEM_RED_WING_PANTS = ITEM_PANTS + 40,
+    ITEM_ANCIENT_PANTS = ITEM_PANTS + 41,
+    ITEM_BLACK_ROSE_PANTS = ITEM_PANTS + 42,
+    ITEM_AURA_PANTS = ITEM_PANTS + 43,
+    ITEM_LILIUM_PANTS = ITEM_PANTS + 44,
+    ITEM_TITAN_PANTS = ITEM_PANTS + 45,
+    ITEM_BRAVE_PANTS = ITEM_PANTS + 46,
+    ITEM_DESTORY_PANTS = ITEM_PANTS + 47,
+    ITEM_PHANTOM_PANTS = ITEM_PANTS + 48,
+    ITEM_SERAPHIM_PANTS = ITEM_PANTS + 49,
+    ITEM_FAITH_PANTS = ITEM_PANTS + 50,
+    ITEM_PAEWANG_PANTS = ITEM_PANTS + 51,
+    ITEM_HADES_PANTS = ITEM_PANTS + 52,
+    ITEM_SACRED_PANTS = ITEM_PANTS + 59,
+    ITEM_STORM_HARD_PANTS = ITEM_PANTS + 60,
+    ITEM_PIERCING_PANTS = ITEM_PANTS + 61,
+    ITEM_PHOENIX_SOUL_PANTS = ITEM_PANTS + 73,
+    ITEM_BRONZE_GLOVES = ITEM_GLOVES + 0,
+    ITEM_DRAGON_GLOVES = ITEM_GLOVES + 1,
+    ITEM_PAD_GLOVES = ITEM_GLOVES + 2,
+    ITEM_LEGENDARY_GLOVES = ITEM_GLOVES + 3,
+    ITEM_BONE_GLOVES = ITEM_GLOVES + 4,
+    ITEM_LEATHER_GLOVES = ITEM_GLOVES + 5,
+    ITEM_SCALE_GLOVES = ITEM_GLOVES + 6,
+    ITEM_SPHINX_GLOVES = ITEM_GLOVES + 7,
+    ITEM_BRASS_GLOVES = ITEM_GLOVES + 8,
+    ITEM_PLATE_GLOVES = ITEM_GLOVES + 9,
+    ITEM_VINE_GLOVES = ITEM_GLOVES + 10,
+    ITEM_SILK_GLOVES = ITEM_GLOVES + 11,
+    ITEM_WIND_GLOVES = ITEM_GLOVES + 12,
+    ITEM_SPIRIT_GLOVES = ITEM_GLOVES + 13,
+    ITEM_GUARDIAN_GLOVES = ITEM_GLOVES + 14,
+    ITEM_STORM_CROW_GLOVES = ITEM_GLOVES + 15,
+    ITEM_BLACK_DRAGON_GLOVES = ITEM_GLOVES + 16,
+    ITEM_DARK_PHOENIX_GLOVES = ITEM_GLOVES + 17,
+    ITEM_GRAND_SOUL_GLOVES = ITEM_GLOVES + 18,
+    ITEM_DIVINE_GLOVES = ITEM_GLOVES + 19,
+    ITEM_THUNDER_HAWK_GLOVES = ITEM_GLOVES + 20,
+    ITEM_GREAT_DRAGON_GLOVES = ITEM_GLOVES + 21,
+    ITEM_DARK_SOUL_GLOVES = ITEM_GLOVES + 22,
+    ITEM_HURRICANE_GLOVES = ITEM_GLOVES + 23,
+    ITEM_RED_SPIRIT_GLOVES = ITEM_GLOVES + 24,
+    ITEM_LIGHT_PLATE_GLOVES = ITEM_GLOVES + 25,
+    ITEM_ADAMANTINE_GLOVES = ITEM_GLOVES + 26,
+    ITEM_DARK_STEEL_GLOVES = ITEM_GLOVES + 27,
+    ITEM_DARK_MASTER_GLOVES = ITEM_GLOVES + 28,
+    ITEM_DRAGON_KNIGHT_GLOVES = ITEM_GLOVES + 29,
+    ITEM_VENOM_MIST_GLOVES = ITEM_GLOVES + 30,
+    ITEM_SYLPHID_RAY_GLOVES = ITEM_GLOVES + 31,
+    ITEM_VOLCANO_GLOVES = ITEM_GLOVES + 32,
+    ITEM_SUNLIGHT_GLOVES = ITEM_GLOVES + 33,
+    ITEM_ASHCROW_GLOVES = ITEM_GLOVES + 34,
+    ITEM_ECLIPSE_GLOVES = ITEM_GLOVES + 35,
+    ITEM_IRIS_GLOVES = ITEM_GLOVES + 36,
+    ITEM_VALIANT_GLOVES = ITEM_GLOVES + 37,
+    ITEM_GLORIOUS_GLOVES = ITEM_GLOVES + 38,
+    ITEM_MISTERY_GLOVES = ITEM_GLOVES + 39,
+    ITEM_RED_WING_GLOVES = ITEM_GLOVES + 40,
+    ITEM_ANCIENT_GLOVES = ITEM_GLOVES + 41,
+    ITEM_BLACK_ROSE_GLOVES = ITEM_GLOVES + 42,
+    ITEM_AURA_GLOVES = ITEM_GLOVES + 43,
+    ITEM_LILIUM_GLOVES = ITEM_GLOVES + 44,
+    ITEM_TITAN_GLOVES = ITEM_GLOVES + 45,
+    ITEM_BRAVE_GLOVES = ITEM_GLOVES + 46,
+    ITEM_DESTORY_GLOVES = ITEM_GLOVES + 47,
+    ITEM_PHANTOM_GLOVES = ITEM_GLOVES + 48,
+    ITEM_SERAPHIM_GLOVES = ITEM_GLOVES + 49,
+    ITEM_FAITH_GLOVES = ITEM_GLOVES + 50,
+    ITEM_PAEWANG_GLOVES = ITEM_GLOVES + 51,
+    ITEM_HADES_GLOVES = ITEM_GLOVES + 52,
+    ITEM_BRONZE_BOOTS = ITEM_BOOTS + 0,
+    ITEM_DRAGON_BOOTS = ITEM_BOOTS + 1,
+    ITEM_PAD_BOOTS = ITEM_BOOTS + 2,
+    ITEM_LEGENDARY_BOOTS = ITEM_BOOTS + 3,
+    ITEM_BONE_BOOTS = ITEM_BOOTS + 4,
+    ITEM_LEATHER_BOOTS = ITEM_BOOTS + 5,
+    ITEM_SCALE_BOOTS = ITEM_BOOTS + 6,
+    ITEM_SPHINX_BOOTS = ITEM_BOOTS + 7,
+    ITEM_BRASS_BOOTS = ITEM_BOOTS + 8,
+    ITEM_PLATE_BOOTS = ITEM_BOOTS + 9,
+    ITEM_VINE_BOOTS = ITEM_BOOTS + 10,
+    ITEM_SILK_BOOTS = ITEM_BOOTS + 11,
+    ITEM_WIND_BOOTS = ITEM_BOOTS + 12,
+    ITEM_SPIRIT_BOOTS = ITEM_BOOTS + 13,
+    ITEM_GUARDIAN_BOOTS = ITEM_BOOTS + 14,
+    ITEM_STORM_CROW_BOOTS = ITEM_BOOTS + 15,
+    ITEM_BLACK_DRAGON_BOOTS = ITEM_BOOTS + 16,
+    ITEM_DARK_PHOENIX_BOOTS = ITEM_BOOTS + 17,
+    ITEM_GRAND_SOUL_BOOTS = ITEM_BOOTS + 18,
+    ITEM_DIVINE_BOOTS = ITEM_BOOTS + 19,
+    ITEM_THUNDER_HAWK_BOOTS = ITEM_BOOTS + 20,
+    ITEM_GREAT_DRAGON_BOOTS = ITEM_BOOTS + 21,
+    ITEM_DARK_SOUL_BOOTS = ITEM_BOOTS + 22,
+    ITEM_HURRICANE_BOOTS = ITEM_BOOTS + 23,
+    ITEM_RED_SPIRIT_BOOTS = ITEM_BOOTS + 24,
+    ITEM_LIGHT_PLATE_BOOTS = ITEM_BOOTS + 25,
+    ITEM_ADAMANTINE_BOOTS = ITEM_BOOTS + 26,
+    ITEM_DARK_STEEL_BOOTS = ITEM_BOOTS + 27,
+    ITEM_DARK_MASTER_BOOTS = ITEM_BOOTS + 28,
+    ITEM_DRAGON_KNIGHT_BOOTS = ITEM_BOOTS + 29,
+    ITEM_VENOM_MIST_BOOTS = ITEM_BOOTS + 30,
+    ITEM_SYLPHID_RAY_BOOTS = ITEM_BOOTS + 31,
+    ITEM_VOLCANO_BOOTS = ITEM_BOOTS + 32,
+    ITEM_SUNLIGHT_BOOTS = ITEM_BOOTS + 33,
+    ITEM_ASHCROW_BOOTS = ITEM_BOOTS + 34,
+    ITEM_ECLIPSE_BOOTS = ITEM_BOOTS + 35,
+    ITEM_IRIS_BOOTS = ITEM_BOOTS + 36,
+    ITEM_VALIANT_BOOTS = ITEM_BOOTS + 37,
+    ITEM_GLORIOUS_BOOTS = ITEM_BOOTS + 38,
+    ITEM_MISTERY_BOOTS = ITEM_BOOTS + 39,
+    ITEM_RED_WING_BOOTS = ITEM_BOOTS + 40,
+    ITEM_ANCIENT_BOOTS = ITEM_BOOTS + 41,
+    ITEM_BLACK_ROSE_BOOTS = ITEM_BOOTS + 42,
+    ITEM_AURA_BOOTS = ITEM_BOOTS + 43,
+    ITEM_LILIUM_BOOTS = ITEM_BOOTS + 44,
+    ITEM_TITAN_BOOTS = ITEM_BOOTS + 45,
+    ITEM_BRAVE_BOOTS = ITEM_BOOTS + 46,
+    ITEM_DESTORY_BOOTS = ITEM_BOOTS + 47,
+    ITEM_PHANTOM_BOOTS = ITEM_BOOTS + 48,
+    ITEM_SERAPHIM_BOOTS = ITEM_BOOTS + 49,
+    ITEM_FAITH_BOOTS = ITEM_BOOTS + 50,
+    ITEM_PHAEWANG_BOOTS = ITEM_BOOTS + 51,
+    ITEM_HADES_BOOTS = ITEM_BOOTS + 52,
+    ITEM_SACRED_BOOTS = ITEM_BOOTS + 59,
+    ITEM_STORM_HARD_BOOTS = ITEM_BOOTS + 60,
+    ITEM_PIERCING_BOOTS = ITEM_BOOTS + 61,
+    ITEM_PHOENIX_SOUL_BOOTS = ITEM_BOOTS + 73,
+    ITEM_WINGS_OF_ELF = ITEM_WING + 0,
+    ITEM_WINGS_OF_HEAVEN = ITEM_WING + 1,
+    ITEM_WINGS_OF_SATAN = ITEM_WING + 2,
+    ITEM_WINGS_OF_SPIRITS = ITEM_WING + 3,
+    ITEM_WINGS_OF_SOUL = ITEM_WING + 4,
+    ITEM_WINGS_OF_DRAGON = ITEM_WING + 5,
+    ITEM_WINGS_OF_DARKNESS = ITEM_WING + 6,
+    ITEM_ORB_OF_TWISTING_SLASH = ITEM_WING + 7,
+    ITEM_ORB_OF_HEALING = ITEM_WING + 8,
+    ITEM_ORB_OF_GREATER_DEFENSE = ITEM_WING + 9,
+    ITEM_ORB_OF_GREATER_DAMAGE = ITEM_WING + 10,
+    ITEM_ORB_OF_SUMMONING = ITEM_WING + 11,
+    ITEM_ORB_OF_RAGEFUL_BLOW = ITEM_WING + 12,
+    ITEM_ORB_OF_IMPALE = ITEM_WING + 13,
+    ITEM_ORB_OF_GREATER_FORTITUDE = ITEM_WING + 14,
+    ITEM_JEWEL_OF_CHAOS = ITEM_WING + 15,
+    ITEM_ORB_OF_FIRE_SLASH = ITEM_WING + 16,
+    ITEM_ORB_OF_PENETRATION = ITEM_WING + 17,
+    ITEM_ORB_OF_ICE_ARROW = ITEM_WING + 18,
+    ITEM_ORB_OF_DEATH_STAB = ITEM_WING + 19,
+    ITEM_SCROLL_OF_FIREBURST = ITEM_WING + 21,
+    ITEM_SCROLL_OF_SUMMON = ITEM_WING + 22,
+    ITEM_SCROLL_OF_CRITICAL_DAMAGE = ITEM_WING + 23,
+    ITEM_SCROLL_OF_ELECTRIC_SPARK = ITEM_WING + 24,
+    ITEM_PACKED_JEWEL_OF_BLESS = ITEM_WING + 30,
+    ITEM_PACKED_JEWEL_OF_SOUL = ITEM_WING + 31,
+    ITEM_RED_RIBBON_BOX = ITEM_WING + 32,
+    ITEM_GREEN_RIBBON_BOX = ITEM_WING + 33,
+    ITEM_BLUE_RIBBON_BOX = ITEM_WING + 34,
+    ITEM_SCROLL_OF_FIRE_SCREAM = ITEM_WING + 35,
+    ITEM_WING_OF_STORM = ITEM_WING + 36,
+    ITEM_WING_OF_ETERNAL = ITEM_WING + 37,
+    ITEM_WING_OF_ILLUSION = ITEM_WING + 38,
+    ITEM_WING_OF_RUIN = ITEM_WING + 39,
+    ITEM_CAPE_OF_EMPEROR = ITEM_WING + 40,
+    ITEM_WING_OF_CURSE = ITEM_WING + 41,
+    ITEM_WINGS_OF_DESPAIR = ITEM_WING + 42,
+    ITEM_WING_OF_DIMENSION = ITEM_WING + 43,
+    ITEM_CRYSTAL_OF_DESTRUCTION = ITEM_WING + 44,
+    ITEM_CRYSTAL_OF_MULTI_SHOT = ITEM_WING + 45,
+    ITEM_CRYSTAL_OF_RECOVERY = ITEM_WING + 46,
+    ITEM_CRYSTAL_OF_FLAME_STRIKE = ITEM_WING + 47,
+    ITEM_SCROLL_OF_CHAOTIC_DISEIER = ITEM_WING + 48,
+    ITEM_CAPE_OF_FIGHTER = ITEM_WING + 49,
+    ITEM_CAPE_OF_OVERRULE = ITEM_WING + 50,
+    ITEM_SEED_FIRE = ITEM_WING + 60,
+    ITEM_SEED_WATER = ITEM_WING + 61,
+    ITEM_SEED_ICE = ITEM_WING + 62,
+    ITEM_SEED_WIND = ITEM_WING + 63,
+    ITEM_SEED_LIGHTNING = ITEM_WING + 64,
+    ITEM_SEED_EARTH = ITEM_WING + 65,
+    ITEM_SPHERE_MONO = ITEM_WING + 70,
+    ITEM_SPHERE_DI = ITEM_WING + 71,
+    ITEM_SPHERE_TRI = ITEM_WING + 72,
+    ITEM_SPHERE_4 = ITEM_WING + 73,
+    ITEM_SPHERE_5 = ITEM_WING + 74,
+    ITEM_SEED_SPHERE_FIRE_1 = ITEM_WING + 100,
+    ITEM_SEED_SPHERE_WATER_1 = ITEM_WING + 101,
+    ITEM_SEED_SPHERE_ICE_1 = ITEM_WING + 102,
+    ITEM_SEED_SPHERE_WIND_1 = ITEM_WING + 103,
+    ITEM_SEED_SPHERE_LIGHTNING_1 = ITEM_WING + 104,
+    ITEM_SEED_SPHERE_EARTH_1 = ITEM_WING + 105,
+    ITEM_SEED_SPHERE_FIRE_2 = ITEM_WING + 106,
+    ITEM_SEED_SPHERE_WATER_2 = ITEM_WING + 107,
+    ITEM_SEED_SPHERE_ICE_2 = ITEM_WING + 108,
+    ITEM_SEED_SPHERE_WIND_2 = ITEM_WING + 109,
+    ITEM_SEED_SPHERE_LIGHTNING_2 = ITEM_WING + 110,
+    ITEM_SEED_SPHERE_EARTH_2 = ITEM_WING + 111,
+    ITEM_SEED_SPHERE_FIRE_3 = ITEM_WING + 112,
+    ITEM_SEED_SPHERE_WATER_3 = ITEM_WING + 113,
+    ITEM_SEED_SPHERE_ICE_3 = ITEM_WING + 114,
+    ITEM_SEED_SPHERE_WIND_3 = ITEM_WING + 115,
+    ITEM_SEED_SPHERE_LIGHTNING_3 = ITEM_WING + 116,
+    ITEM_SEED_SPHERE_EARTH_3 = ITEM_WING + 117,
+    ITEM_SEED_SPHERE_FIRE_4 = ITEM_WING + 118,
+    ITEM_SEED_SPHERE_WATER_4 = ITEM_WING + 119,
+    ITEM_SEED_SPHERE_ICE_4 = ITEM_WING + 120,
+    ITEM_SEED_SPHERE_WIND_4 = ITEM_WING + 121,
+    ITEM_SEED_SPHERE_LIGHTNING_4 = ITEM_WING + 122,
+    ITEM_SEED_SPHERE_EARTH_4 = ITEM_WING + 123,
+    ITEM_SEED_SPHERE_FIRE_5 = ITEM_WING + 124,
+    ITEM_SEED_SPHERE_WATER_5 = ITEM_WING + 125,
+    ITEM_SEED_SPHERE_ICE_5 = ITEM_WING + 126,
+    ITEM_SEED_SPHERE_WIND_5 = ITEM_WING + 127,
+    ITEM_SEED_SPHERE_LIGHTNING_5 = ITEM_WING + 128,
+    ITEM_SEED_SPHERE_EARTH_5 = ITEM_WING + 129,
+    ITEM_PACKED_JEWEL_OF_LIFE = ITEM_WING + 136,
+    ITEM_PACKED_JEWEL_OF_CREATION = ITEM_WING + 137,
+    ITEM_PACKED_JEWEL_OF_GUARDIAN = ITEM_WING + 138,
+    ITEM_PACKED_GEMSTONE = ITEM_WING + 139,
+    ITEM_PACKED_JEWEL_OF_HARMONY = ITEM_WING + 140,
+    ITEM_PACKED_JEWEL_OF_CHAOS = ITEM_WING + 141,
+    ITEM_PACKED_LOWER_REFINE_STONE = ITEM_WING + 142,
+    ITEM_PACKED_HIGHER_REFINE_STONE = ITEM_WING + 143,
+    ITEM_GUARDIAN_ANGEL = ITEM_HELPER + 0,
+    ITEM_IMP = ITEM_HELPER + 1,
+    ITEM_HORN_OF_UNIRIA = ITEM_HELPER + 2,
+    ITEM_HORN_OF_DINORANT = ITEM_HELPER + 3,
+    ITEM_DARK_HORSE_ITEM = ITEM_HELPER + 4,
+    ITEM_DARK_RAVEN_ITEM = ITEM_HELPER + 5,
+    ITEM_RING_OF_ICE = ITEM_HELPER + 8,
+    ITEM_RING_OF_POISON = ITEM_HELPER + 9,
+    ITEM_TRANSFORMATION_RING = ITEM_HELPER + 10,
+    ITEM_LIFE_STONE_ITEM = ITEM_HELPER + 11,
+    ITEM_PENDANT_OF_LIGHTING = ITEM_HELPER + 12,
+    ITEM_PENDANT_OF_FIRE = ITEM_HELPER + 13,
+    ITEM_LOCHS_FEATHER = ITEM_HELPER + 14,
+    ITEM_FRUITS = ITEM_HELPER + 15,
+    ITEM_SCROLL_OF_ARCHANGEL = ITEM_HELPER + 16,
+    ITEM_BLOOD_BONE = ITEM_HELPER + 17,
+    ITEM_INVISIBILITY_CLOAK = ITEM_HELPER + 18,
+    ITEM_WEAPON_OF_ARCHANGEL = ITEM_HELPER + 19,
+    ITEM_WIZARDS_RING = ITEM_HELPER + 20,
+    ITEM_RING_OF_FIRE = ITEM_HELPER + 21,
+    ITEM_RING_OF_EARTH = ITEM_HELPER + 22,
+    ITEM_RING_OF_WIND = ITEM_HELPER + 23,
+    ITEM_RING_OF_MAGIC = ITEM_HELPER + 24,
+    ITEM_PENDANT_OF_ICE = ITEM_HELPER + 25,
+    ITEM_PENDANT_OF_WIND = ITEM_HELPER + 26,
+    ITEM_PENDANT_OF_WATER = ITEM_HELPER + 27,
+    ITEM_PENDANT_OF_ABILITY = ITEM_HELPER + 28,
+    ITEM_ARMOR_OF_GUARDSMAN = ITEM_HELPER + 29,
+    ITEM_CAPE_OF_LORD = ITEM_HELPER + 30,
+    ITEM_SPIRIT = ITEM_HELPER + 31,
+    ITEM_SPLINTER_OF_ARMOR = ITEM_HELPER + 32,
+    ITEM_BLESS_OF_GUARDIAN = ITEM_HELPER + 33,
+    ITEM_CLAW_OF_BEAST = ITEM_HELPER + 34,
+    ITEM_FRAGMENT_OF_HORN = ITEM_HELPER + 35,
+    ITEM_BROKEN_HORN = ITEM_HELPER + 36,
+    ITEM_HORN_OF_FENRIR = ITEM_HELPER + 37,
+    ITEM_MOONSTONE_PENDANT = ITEM_HELPER + 38,
+    ITEM_ELITE_TRANSFER_SKELETON_RING = ITEM_HELPER + 39,
+    ITEM_JACK_OLANTERN_TRANSFORMATION_RING = ITEM_HELPER + 40,
+    ITEM_CHRISTMAS_TRANSFORMATION_RING = ITEM_HELPER + 41,
+    ITEM_GAME_MASTER_TRANSFORMATION_RING = ITEM_HELPER + 42,
+    ITEM_OLD_SCROLL = ITEM_HELPER + 49,
+    ITEM_ILLUSION_SORCERER_COVENANT = ITEM_HELPER + 50,
+    ITEM_SCROLL_OF_BLOOD = ITEM_HELPER + 51,
+    ITEM_FLAME_OF_CONDOR = ITEM_HELPER + 52,
+    ITEM_FEATHER_OF_CONDOR = ITEM_HELPER + 53,
+    ITEM_DEMON = ITEM_HELPER + 64,
+    ITEM_SPIRIT_OF_GUARDIAN = ITEM_HELPER + 65,
+    ITEM_PET_RUDOLF = ITEM_HELPER + 67,
+    ITEM_SNOWMAN_TRANSFORMATION_RING = ITEM_HELPER + 68,
+    ITEM_PANDA_TRANSFORMATION_RING = ITEM_HELPER + 76,
+    ITEM_PET_PANDA = ITEM_HELPER + 80,
+    ITEM_PET_UNICORN = ITEM_HELPER + 106,
+    ITEM_SKELETON_TRANSFORMATION_RING = ITEM_HELPER + 122,
+    ITEM_PET_SKELETON = ITEM_HELPER + 123,
+    ITEM_TRANSFORMATION_RING1 = ITEM_HELPER + 163,
+    ITEM_TRANSFORMATION_RING2 = ITEM_HELPER + 164,
+    ITEM_TRANSFORMATION_RING3 = ITEM_HELPER + 165,
+    ITEM_APPLE = ITEM_POTION + 0,
+    ITEM_SMALL_HEALING_POTION = ITEM_POTION + 1,
+    ITEM_MEDIUM_HEALING_POTION = ITEM_POTION + 2,
+    ITEM_LARGE_HEALING_POTION = ITEM_POTION + 3,
+    ITEM_SMALL_MANA_POTION = ITEM_POTION + 4,
+    ITEM_MEDIUM_MANA_POTION = ITEM_POTION + 5,
+    ITEM_LARGE_MANA_POTION = ITEM_POTION + 6,
+    ITEM_SIEGE_POTION = ITEM_POTION + 7,
+    ITEM_ANTIDOTE = ITEM_POTION + 8,
+    ITEM_ALE = ITEM_POTION + 9,
+    ITEM_TOWN_PORTAL_SCROLL = ITEM_POTION + 10,
+    ITEM_BOX_OF_LUCK = ITEM_POTION + 11,
+    ITEM_JEWEL_OF_BLESS = ITEM_POTION + 13,
+    ITEM_JEWEL_OF_SOUL = ITEM_POTION + 14,
+    ITEM_JEWEL_OF_LIFE = ITEM_POTION + 16,
+    ITEM_DEVILS_EYE = ITEM_POTION + 17,
+    ITEM_DEVILS_KEY = ITEM_POTION + 18,
+    ITEM_DEVILS_INVITATION = ITEM_POTION + 19,
+    ITEM_JEWEL_OF_CREATION = ITEM_POTION + 22,
+    ITEM_SCROLL_OF_EMPEROR_RING_OF_HONOR = ITEM_POTION + 23,
+    ITEM_BROKEN_SWORD_DARK_STONE = ITEM_POTION + 24,
+    ITEM_TEAR_OF_ELF = ITEM_POTION + 25,
+    ITEM_SOUL_SHARD_OF_WIZARD = ITEM_POTION + 26,
+    ITEM_LOST_MAP = ITEM_POTION + 28,
+    ITEM_SYMBOL_OF_KUNDUN = ITEM_POTION + 29,
+    ITEM_JEWEL_OF_GUARDIAN = ITEM_POTION + 31,
+    ITEM_PINK_CHOCOLATE_BOX = ITEM_POTION + 32,
+    ITEM_RED_CHOCOLATE_BOX = ITEM_POTION + 33,
+    ITEM_BLUE_CHOCOLATE_BOX = ITEM_POTION + 34,
+    ITEM_SMALL_SHIELD_POTION = ITEM_POTION + 35,
+    ITEM_MEDIUM_SHIELD_POTION = ITEM_POTION + 36,
+    ITEM_LARGE_SHIELD_POTION = ITEM_POTION + 37,
+    ITEM_SMALL_COMPLEX_POTION = ITEM_POTION + 38,
+    ITEM_MEDIUM_COMPLEX_POTION = ITEM_POTION + 39,
+    ITEM_LARGE_COMPLEX_POTION = ITEM_POTION + 40,
+    ITEM_GEMSTONE = ITEM_POTION + 41,
+    ITEM_JEWEL_OF_HARMONY = ITEM_POTION + 42,
+    ITEM_LOWER_REFINE_STONE = ITEM_POTION + 43,
+    ITEM_HIGHER_REFINE_STONE = ITEM_POTION + 44,
+    ITEM_PUMPKIN_OF_LUCK = ITEM_POTION + 45,
+    ITEM_JACK_OLANTERN_BLESSINGS = ITEM_POTION + 46,
+    ITEM_JACK_OLANTERN_WRATH = ITEM_POTION + 47,
+    ITEM_JACK_OLANTERN_CRY = ITEM_POTION + 48,
+    ITEM_JACK_OLANTERN_FOOD = ITEM_POTION + 49,
+    ITEM_JACK_OLANTERN_DRINK = ITEM_POTION + 50,
+    ITEM_CHRISTMAS_STAR = ITEM_POTION + 51,
+    ITEM_GM_GIFT = ITEM_POTION + 52,
+    ITEM_FIRECRACKER = ITEM_POTION + 63,
+    ITEM_FLAME_OF_DEATH_BEAM_KNIGHT = ITEM_POTION + 65,
+    ITEM_HORN_OF_HELL_MAINE = ITEM_POTION + 66,
+    ITEM_FEATHER_OF_DARK_PHOENIX = ITEM_POTION + 67,
+    ITEM_EYE_OF_ABYSSAL = ITEM_POTION + 68,
+    ITEM_CHERRY_BLOSSOM_PLAYBOX = ITEM_POTION + 84,
+    ITEM_CHERRY_BLOSSOM_WINE = ITEM_POTION + 85,
+    ITEM_CHERRY_BLOSSOM_RICE_CAKE = ITEM_POTION + 86,
+    ITEM_CHERRY_BLOSSOM_FLOWER_PETAL = ITEM_POTION + 87,
+    ITEM_GOLDEN_CHERRY_BLOSSOM_BRANCH = ITEM_POTION + 90,
+    ITEM_CHRISTMAS_FIRECRACKER = ITEM_POTION + 99,
+    ITEM_SUSPICIOUS_SCRAP_OF_PAPER = ITEM_POTION + 101,
+    ITEM_GAIONS_ORDER = ITEM_POTION + 102,
+    ITEM_FIRST_SECROMICON_FRAGMENT = ITEM_POTION + 103,
+    ITEM_SECOND_SECROMICON_FRAGMENT = ITEM_POTION + 104,
+    ITEM_THIRD_SECROMICON_FRAGMENT = ITEM_POTION + 105,
+    ITEM_FOURTH_SECROMICON_FRAGMENT = ITEM_POTION + 106,
+    ITEM_FIFTH_SECROMICON_FRAGMENT = ITEM_POTION + 107,
+    ITEM_SIXTH_SECROMICON_FRAGMENT = ITEM_POTION + 108,
+    ITEM_COMPLETE_SECROMICON = ITEM_POTION + 109,
+    ITEM_SCROLL_OF_POISON = ITEM_ETC + 0,
+    ITEM_SCROLL_OF_METEORITE = ITEM_ETC + 1,
+    ITEM_SCROLL_OF_LIGHTING = ITEM_ETC + 2,
+    ITEM_SCROLL_OF_FIRE_BALL = ITEM_ETC + 3,
+    ITEM_SCROLL_OF_FLAME = ITEM_ETC + 4,
+    ITEM_SCROLL_OF_TELEPORT = ITEM_ETC + 5,
+    ITEM_SCROLL_OF_ICE = ITEM_ETC + 6,
+    ITEM_SCROLL_OF_TWISTER = ITEM_ETC + 7,
+    ITEM_SCROLL_OF_EVIL_SPIRIT = ITEM_ETC + 8,
+    ITEM_SCROLL_OF_HELLFIRE = ITEM_ETC + 9,
+    ITEM_SCROLL_OF_POWER_WAVE = ITEM_ETC + 10,
+    ITEM_SCROLL_OF_AQUA_BEAM = ITEM_ETC + 11,
+    ITEM_SCROLL_OF_COMETFALL = ITEM_ETC + 12,
+    ITEM_SCROLL_OF_INFERNO = ITEM_ETC + 13,
+    ITEM_SCROLL_OF_TELEPORT_ALLY = ITEM_ETC + 14,
+    ITEM_SCROLL_OF_SOUL_BARRIER = ITEM_ETC + 15,
+    ITEM_SCROLL_OF_DECAY = ITEM_ETC + 16,
+    ITEM_SCROLL_OF_ICE_STORM = ITEM_ETC + 17,
+    ITEM_SCROLL_OF_NOVA = ITEM_ETC + 18,
+    ITEM_CHAIN_LIGHTNING_PARCHMENT = ITEM_ETC + 19,
+    ITEM_DRAIN_LIFE_PARCHMENT = ITEM_ETC + 20,
+    ITEM_LIGHTNING_SHOCK_PARCHMENT = ITEM_ETC + 21,
+    ITEM_DAMAGE_REFLECTION_PARCHMENT = ITEM_ETC + 22,
+    ITEM_BERSERKER_PARCHMENT = ITEM_ETC + 23,
+    ITEM_SLEEP_PARCHMENT = ITEM_ETC + 24,
+    ITEM_WEAKNESS_PARCHMENT = ITEM_ETC + 26,
+    ITEM_INNOVATION_PARCHMENT = ITEM_ETC + 27,
+    ITEM_SCROLL_OF_WIZARDRY_ENHANCE = ITEM_ETC + 28,
+    ITEM_SCROLL_OF_GIGANTIC_STORM = ITEM_ETC + 29,
+    ITEM_CHAIN_DRIVE_PARCHMENT = ITEM_ETC + 30,
+    ITEM_DARK_SIDE_PARCHMENT = ITEM_ETC + 31,
+    ITEM_DRAGON_ROAR_PARCHMENT = ITEM_ETC + 32,
+    ITEM_DRAGON_SLASHER_PARCHMENT = ITEM_ETC + 33,
+    ITEM_IGNORE_DEFENSE_PARCHMENT = ITEM_ETC + 34,
+    ITEM_INCREASE_HEALTH_PARCHMENT = ITEM_ETC + 35,
+    ITEM_INCREASE_BLOCK_PARCHMENT = ITEM_ETC + 36,
+};
+
+enum
+{
+    PSHOPWNDTYPE_NONE = -1,
+    PSHOPWNDTYPE_SALE = 1,
+    PSHOPWNDTYPE_PURCHASE
+};
+enum ITEM_EX_SRC_TYPE
+{
+    ITEM_EX_SRC_EQUIPMENT = 1,
+};
+
+enum ENUM_KEYPADMODE
+{
+    KPM_MOVE = 1,
+    KPM_LOCK3 = 2,
+    KPM_UNLOCK = 3,
+    KPM_LOCK1 = 4,
+    KPM_LOCK2 = 5,
+    KPM_SERVER_IMMIGRATION_CHECK = 6,
+};
+
+enum
+{
+    ITEM_ETC_TYPE = 0,
+    ITEM_DARKHORSE,
+    ITEM_DARKSPIRIT,
+    ITEM_BLESS_GEM,
+    ITEM_SPIRIT_GEM,
+    ITEM_CHAOS_GEM,
+    ITEM_CREATING_GEM,
+    ITEM_LIFE_GEM,
+    ITEM_END
+};
+
+enum ITEM_COLORSTATE
+{
+    ITEM_COLOR_NORMAL = 0,
+    ITEM_COLOR_DURABILITY_50,
+    ITEM_COLOR_DURABILITY_70,
+    ITEM_COLOR_DURABILITY_80,
+    ITEM_COLOR_DURABILITY_100,
+    ITEM_COLOR_TRADE_WARNING,
+};
+
+class SessionItemStore;
+
+namespace info
+{
+struct Script_Item
+{
+    wchar_t Name[30];
+    bool TwoHand;
+    WORD Level;
+    BYTE m_byItemSlot;
+    BYTE m_bySkillIndex;
+    BYTE Width;
+    BYTE Height;
+    BYTE DamageMin;
+    BYTE DamageMax;
+    BYTE SuccessfulBlocking;
+    BYTE Defense;
+    BYTE MagicDefense;
+    BYTE WeaponSpeed;
+    BYTE WalkSpeed;
+    BYTE Durability;
+    BYTE MagicDur;
+    BYTE MagicPower;
+    WORD RequireStrength;
+    WORD RequireDexterity;
+    WORD RequireEnergy;
+    WORD RequireVitality;
+    WORD RequireCharisma;
+    WORD RequireLevel;
+    BYTE Value;
+    int iZen;
+    BYTE AttType;
+    BYTE RequireClass[MAX_CLASS];
+    BYTE Resistance[MAX_RESISTANCE];
+};
+
+}; // namespace info
+
+#pragma pack(push, 1)
+typedef struct tagITEM
+{
+    short Type;
+    int Level;
+    BYTE Durability;
+    BYTE OptionLevel;
+    BYTE OptionType;
+    BYTE ExcellentFlags;
+    BYTE AncientDiscriminator; // 0 = no ancient;
+    BYTE AncientBonusOption;
+    WORD Jewel_Of_Harmony_Option;
+    WORD Jewel_Of_Harmony_OptionLevel;
+    bool HasSkill;
+    bool HasLuck;
+    BYTE Part;
+    BYTE Class;
+    bool TwoHand;
+    WORD DamageMin;
+    WORD DamageMax;
+    BYTE SuccessfulBlocking;
+    WORD Defense;
+    WORD MagicDefense;
+    BYTE MagicPower;
+    BYTE WeaponSpeed;
+    WORD WalkSpeed;
+
+    WORD RequireStrength;
+    WORD RequireDexterity;
+    WORD RequireEnergy;
+    WORD RequireVitality;
+    WORD RequireCharisma;
+    WORD RequireLevel;
+    BYTE SpecialNum;
+    WORD Special[MAX_ITEM_SPECIAL];
+    BYTE SpecialValue[MAX_ITEM_SPECIAL];
+    DWORD Key; //client olny
+
+    BYTE bySelectedSlotIndex;
+
+    union {
+        BYTE x; //client olny
+        BYTE lineal_pos;
+    };
+    union {
+        BYTE y; //client olny
+        BYTE ex_src_type;
+    };
+    bool option_380;
+
+    BYTE SocketCount;
+    BYTE bySocketOption[MAX_SOCKETS];
+    BYTE SocketSeedID[MAX_SOCKETS];
+    BYTE SocketSphereLv[MAX_SOCKETS];
+    BYTE SocketSeedSetOption;
+
+    int Number;
+    BYTE Color;
+
+    BYTE byColorState;
+
+    bool bPeriodItem;
+    bool bExpiredPeriod;
+    long lExpireTime;
+
+  private:
+    friend class SessionItemStore;
+    int RefCount;
+} ITEM;
+#pragma pack(pop)
+
+struct tagITEM_t;
+typedef tagITEM_t ITEM_t;
+
+/**
+ * \brief Types of storage where items can be moved from/to.
+ */
+enum struct STORAGE_TYPE
+{
+    UNDEFINED = -1,
+    INVENTORY = 0,
+    TRADE = 1,
+    VAULT = 2,
+    CHAOS_MIX = 3,
+    MYSHOP = 4,
+    TRAINER_MIX = 5,
+    ELPIS_MIX = 6,
+    OSBOURNE_MIX = 7,
+    JERRIDON_MIX = 8,
+    CHAOS_CARD_MIX = 9,
+    CHERRYBLOSSOM_MIX = 10,
+    EXTRACT_SEED_MIX = 11,
+    SEED_SPHERE_MIX = 12,
+    ATTACH_SOCKET_MIX = 13,
+    DETACH_SOCKET_MIX = 14,
+    LUCKYITEM_TRADE = 15,
+    LUCKYITEM_REFINERY = 16,
+};
+
+enum _COLUMN_TYPE
+{
+    _COLUMN_TYPE_LEVEL = 0,
+    _COLUMN_TYPE_CAN_EQUIP,
+    _COLUMN_TYPE_ATTMIN,
+    _COLUMN_TYPE_ATTMAX,
+    _COLUMN_TYPE_MAGIC,
+    _COLUMN_TYPE_CURSE,
+    _COLUMN_TYPE_PET_ATTACK,
+    _COLUMN_TYPE_DEFENCE,
+    _COLUMN_TYPE_DEFRATE,
+    _COLUMN_TYPE_REQSTR,
+    _COLUMN_TYPE_REQDEX,
+    _COLUMN_TYPE_REQENG,
+    _COLUMN_TYPE_A_SET,
+    _COLUMN_TYPE_B_SET,
+    _COLUMN_TYPE_REQCHA,
+    _COLUMN_TYPE_REQVIT,
+    _COLUMN_TYPE_REQNLV
+};
+
+constexpr auto MAX_ITEM_SET_NAME = 64;
+
+constexpr auto MAX_ITEM_SET_STANDARD_OPTION_COUNT = 6;
+constexpr auto MAX_ITEM_SET_STANDARD_OPTION_PER_ITEM_COUNT = 2;
+constexpr auto MAX_ITEM_SET_EXT_OPTION_COUNT = 2;
+constexpr auto MAX_ITEM_SETS_PER_ITEM = 2;
+constexpr auto MAX_ITEM_SET_FULL_OPTION_COUNT = 5;
+
+constexpr auto MAX_OPTIONS_PER_ITEM_SET =
+    MAX_ITEM_SET_STANDARD_OPTION_COUNT * MAX_ITEM_SET_STANDARD_OPTION_PER_ITEM_COUNT +
+    MAX_ITEM_SET_FULL_OPTION_COUNT + MAX_ITEM_SET_EXT_OPTION_COUNT;
+
+namespace ItemOptionDataDetail
+{
+
+#pragma pack(push)
+#pragma pack()
+inline constexpr std::uint8_t EMPTY_OPTION = 0xFF;
+#pragma pack(pop)
+
+#pragma pack(push)
+#pragma pack()
+using FilePtr = std::unique_ptr<FILE, decltype(&std::fclose)>;
+#pragma pack(pop)
+
+#pragma pack(push)
+#pragma pack()
+struct ITEM_SET_OPTION_FILE
+{
+    char strSetName[MAX_ITEM_SET_NAME];
+    std::array<std::array<std::uint8_t, MAX_ITEM_SET_STANDARD_OPTION_PER_ITEM_COUNT>,
+               MAX_ITEM_SET_STANDARD_OPTION_COUNT>
+        byStandardOption{};
+    std::array<std::array<std::uint8_t, MAX_ITEM_SET_STANDARD_OPTION_PER_ITEM_COUNT>,
+               MAX_ITEM_SET_STANDARD_OPTION_COUNT>
+        byStandardOptionValue{};
+    std::array<std::uint8_t, MAX_ITEM_SET_EXT_OPTION_COUNT> byExtOption{};
+    std::array<std::uint8_t, MAX_ITEM_SET_EXT_OPTION_COUNT> byExtOptionValue{};
+    std::uint8_t byOptionCount;
+    std::array<std::uint8_t, MAX_ITEM_SET_FULL_OPTION_COUNT> byFullOption{};
+    std::array<std::uint8_t, MAX_ITEM_SET_FULL_OPTION_COUNT> byFullOptionValue{};
+    std::array<std::uint8_t, MAX_CLASS> byRequireClass{};
+};
+#pragma pack(pop)
+
+} // namespace ItemOptionDataDetail

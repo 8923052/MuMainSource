@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "kind": "mu-r5.2-render-tape-shaders",
+  "shadercross_revision": "e55cf5e31ced6f3d1be5cc6d0c50e99384f9f4ba",
+  "configuration": {
+    "dxc": true,
+    "vendored": true,
+    "spirv_cross_shared": false,
+    "debug": false,
+    "cull_unused_bindings": false,
+    "msl_version": "1.2.0"
+  },
+  "generated_header": "App/Render/Shaders/RenderTapeShaderArtifacts.generated.h",
+  "stages": [
+    {
+      "name": "vertex",
+      "source": "src/client/render/shaders/RenderTape.vert.hlsl",
+      "stage": "vertex",
+      "entry_point": "main",
+      "include_directory": "src/client/render/shaders",
+      "defines": [],
+      "source_sha256": "c3b1f921003f593c5cd8f645a074f5727a547b0480edfb64cd014e14ba071e21",
+      "reflection": {
+        "samplers": 0,
+        "storage_textures": 0,
+        "storage_buffers": 4,
+        "uniform_buffers": 1,
+        "inputs": [
+          {
+            "name": "in.var.TEXCOORD0",
+            "type": "float4",
+            "location": 0
+          },
+          {
+            "name": "in.var.TEXCOORD1",
+            "type": "float4",
+            "location": 1
+          },
+          {
+            "name": "in.var.TEXCOORD2",
+            "type": "float3",
+            "location": 2
+          },
+          {
+            "name": "in.var.TEXCOORD3",
+            "type": "float2",
+            "location": 3
+          },
+          {
+            "name": "in.var.TEXCOORD4",
+            "type": "uint4",
+            "location": 4
+          }
+        ],
+        "outputs": [
+          {
+            "name": "out.var.TEXCOORD0",
+            "type": "float4",
+            "location": 0
+          },
+          {
+            "name": "out.var.TEXCOORD2",
+            "type": "float2",
+            "location": 1
+          },
+          {
+            "name": "out.var.TEXCOORD3",
+            "type": "float",
+            "location": 2
+          }
+        ]
+      },
+      "artifacts": {
+        "dxil": {
+          "path": "RenderTape.vert.dxil",
+          "sha256": "9d7b7c43bcf828dcc267aa74c8633ea31e3de41442e31c08376bcf82583323f5"
+        },
+        "spirv": {
+          "path": "RenderTape.vert.spv",
+          "sha256": "c28e3e3952c9fe085bb704e9edc6fa1571952eb258a5206063b9dee4c37c69bb"
+        },
+        "msl": {
+          "path": "RenderTape.vert.msl",
+          "sha256": "42b4f1b44ffdf9d79bef3582bca527b7eab87507a6f15cfacaf87c1b80746e4b"
+        },
+        "reflection": {
+          "path": "RenderTape.vert.json",
+          "sha256": "02f6198a3b084695137629e2e886197b1c1e18423b2c05f987e0e80fed79f28a"
+        }
+      }
+    },
+    {
+      "name": "fragment",
+      "source": "src/client/render/shaders/RenderTape.frag.hlsl",
+      "stage": "fragment",
+      "entry_point": "main",
+      "include_directory": "src/client/render/shaders",
+      "defines": [],
+      "source_sha256": "4146e49de908e566d4efd0775718658414802e6bc97948bf91c856743a119867",
+      "reflection": {
+        "samplers": 1,
+        "storage_textures": 0,
+        "storage_buffers": 0,
+        "uniform_buffers": 1,
+        "inputs": [
+          {
+            "name": "in.var.TEXCOORD0",
+            "type": "float4",
+            "location": 0
+          },
+          {
+            "name": "in.var.TEXCOORD2",
+            "type": "float2",
+            "location": 1
+          },
+          {
+            "name": "in.var.TEXCOORD3",
+            "type": "float",
+            "location": 2
+          }
+        ],
+        "outputs": [
+          {
+            "name": "out.var.SV_Target0",
+            "type": "float4",
+            "location": 0
+          }
+        ]
+      },
+      "artifacts": {
+        "dxil": {
+          "path": "RenderTape.frag.dxil",
+          "sha256": "9c41c90aa10381ace396783e80e43285549a8632453e60825cdeb54a70d88add"
+        },
+        "spirv": {
+          "path": "RenderTape.frag.spv",
+          "sha256": "ed4eae0a78d98a7a33114841f1e9b517f5266df7af721cd09cd62271b76bcb6c"
+        },
+        "msl": {
+          "path": "RenderTape.frag.msl",
+          "sha256": "a73b532e2506f935d1ddd8cc82ec1cd06364b4d9fde67af20a9ae7192f2804aa"
+        },
+        "reflection": {
+          "path": "RenderTape.frag.json",
+          "sha256": "dadaaa652cb0067856a3992b615f289e2cb1540ff491ef69203307b5d8290705"
+        }
+      }
+    }
+  ]
+}

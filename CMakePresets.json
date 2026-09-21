@@ -1,0 +1,150 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "windows-ninja-base",
+      "hidden": true,
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "ninja-x86",
+      "displayName": "Ninja x86",
+      "inherits": "windows-ninja-base",
+      "binaryDir": "${sourceDir}/build/cmake/ninja/x86",
+      "architecture": {
+        "value": "x86",
+        "strategy": "external"
+      },
+      "toolchainFile": "${sourceDir}/cmake/toolchains/msvc-x86.cmake",
+      "cacheVariables": {
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin/x86",
+        "MU_MAIN_OUTPUT_NAME": "Main"
+      }
+    },
+    {
+      "name": "ninja-x64",
+      "displayName": "Ninja x64",
+      "inherits": "windows-ninja-base",
+      "binaryDir": "${sourceDir}/build/cmake/ninja/x64",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "toolchainFile": "${sourceDir}/cmake/toolchains/msvc-x64.cmake",
+      "cacheVariables": {
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin/x64",
+        "MU_MAIN_OUTPUT_NAME": "Main"
+      }
+    },
+    {
+      "name": "windows-vs2022-base",
+      "hidden": true,
+      "generator": "Visual Studio 17 2022",
+      "cacheVariables": {
+        "CMAKE_CONFIGURATION_TYPES": "Debug;Release"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "vs2022-x86",
+      "displayName": "Visual Studio 2022 x86",
+      "inherits": "windows-vs2022-base",
+      "binaryDir": "${sourceDir}/build/cmake/vs2022/x86",
+      "architecture": "Win32",
+      "toolchainFile": "${sourceDir}/cmake/toolchains/msvc-x86.cmake",
+      "toolset": "host=x64",
+      "cacheVariables": {
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin/x86",
+        "MU_MAIN_OUTPUT_NAME": "Main"
+      }
+    },
+    {
+      "name": "vs2022-x64",
+      "displayName": "Visual Studio 2022 x64",
+      "inherits": "windows-vs2022-base",
+      "binaryDir": "${sourceDir}/build/cmake/vs2022/x64",
+      "architecture": "x64",
+      "toolchainFile": "${sourceDir}/cmake/toolchains/msvc-x64.cmake",
+      "toolset": "host=x64",
+      "cacheVariables": {
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin/x64",
+        "MU_MAIN_OUTPUT_NAME": "Main"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build-base",
+      "hidden": true,
+      "jobs": 8,
+      "targets": [
+        "Main"
+      ]
+    },
+    {
+      "name": "ninja-x86-debug",
+      "inherits": "build-base",
+      "configurePreset": "ninja-x86",
+      "configuration": "Debug"
+    },
+    {
+      "name": "ninja-x86-release",
+      "inherits": "build-base",
+      "configurePreset": "ninja-x86",
+      "configuration": "Release"
+    },
+    {
+      "name": "ninja-x64-debug",
+      "inherits": "build-base",
+      "configurePreset": "ninja-x64",
+      "configuration": "Debug"
+    },
+    {
+      "name": "ninja-x64-release",
+      "inherits": "build-base",
+      "configurePreset": "ninja-x64",
+      "configuration": "Release"
+    },
+    {
+      "name": "vs2022-x86-debug",
+      "inherits": "build-base",
+      "configurePreset": "vs2022-x86",
+      "configuration": "Debug"
+    },
+    {
+      "name": "vs2022-x86-release",
+      "inherits": "build-base",
+      "configurePreset": "vs2022-x86",
+      "configuration": "Release"
+    },
+    {
+      "name": "vs2022-x64-debug",
+      "inherits": "build-base",
+      "configurePreset": "vs2022-x64",
+      "configuration": "Debug"
+    },
+    {
+      "name": "vs2022-x64-release",
+      "inherits": "build-base",
+      "configurePreset": "vs2022-x64",
+      "configuration": "Release"
+    }
+  ]
+}

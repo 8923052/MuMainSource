@@ -1,0 +1,8 @@
+{
+  "World3": {
+    "imageOriginPixels": [3, 9],
+    "source": "World3/EncTerrain3.att and World3/mini_map.OZT",
+    "measurement": "tools/measure_map_alignment.py --world 3",
+    "method": "Align layout alpha with the terrain no-ground boundary at tile centers; measured 2026-09-12."
+  }
+}
