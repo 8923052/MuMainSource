@@ -12,6 +12,36 @@ This repository contains the Windows client, launcher, runtime assets, and every
 
 ![MuTwo gameplay screenshot 4](screenshots/4.png)
 
+## Client features
+
+- Native C++20 client for Windows x86 and x64.
+- Runs multiple game sessions in one client workspace.
+- Supports single-session and four-session grid views.
+- Uses configurable workers for parallel session workloads.
+- Renders through SDL3 GPU with Direct3D 12 or Vulkan.
+- Supports VSync and a separate FPS limit.
+- Uses scalable RmlUi panels and reusable controls.
+- Packs named UI sprites into compact shared atlases.
+- Separates application, session, network, gameplay, UI, audio, and rendering state.
+- Supports selectable UI languages, fonts, and interface scales.
+- Supports automatic server, channel, and character selection (pair with launcher).
+- ...
+
+## Launcher features
+
+- Ships as a self-contained Avalonia desktop application.
+- Shows server availability, latency, channels, and channel load.
+- Refreshes server status automatically every 20 seconds.
+- Creates, edits, starts, and deletes session presets.
+- Supports multiple account slots and controlled launch delays.
+- Encrypts saved passwords for the current Windows user.
+- Supports automatic server, channel, and character selection.
+- Records configurable shortcuts for session control.
+- Edits renderer, VSync, FPS limit, and worker count.
+- Edits resolution, window mode, language, font, UI scale, and audio volume.
+- Includes direct `config.ini` editing for advanced users.
+- ...
+
 ## Quick start
 
 ### Use an existing build
