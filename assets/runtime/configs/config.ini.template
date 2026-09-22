@@ -8,7 +8,7 @@ MasterSoundVolume=5
 MasterMusicVolume=5
 
 [Network]
-DefaultConnectServerIP=127.127.127.127
+DefaultConnectServerIP=localhost
 DefaultConnectServerPort=44405
 
 [Localization]
