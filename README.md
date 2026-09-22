@@ -46,7 +46,7 @@ This repository contains the Windows client, launcher, runtime assets, and every
 
 ### Use an existing build
 
-1. Open `bin/<architecture>/<configuration>/`.
+1. Download and Extract V1.0 MuClient.7z in Releases
 2. Run `MuLauncher.exe`.
 3. Configure the server address and client options.
 4. Start the client. The launcher uses `Main.exe` from the same folder.
